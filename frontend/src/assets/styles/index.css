@@ -1,0 +1,29 @@
+main {
+  min-height: 83vh;
+}
+
+.product-title {
+  height: 2.5em; /* Set a fixed height */
+  overflow: hidden; /* Hide overflow content */
+  text-overflow: ellipsis; /* Add ellipsis for long text */
+  white-space: nowrap; /* Prevent wrapping */
+}
+.card-body {
+  flex: 1 1 auto;
+  padding: 4px;
+  color: var(--bs-card-color);
+}
+
+table td,
+table th {
+  text-align: center;
+}
+
+.carousel-caption {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
