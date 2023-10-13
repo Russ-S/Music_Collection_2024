@@ -1,26 +1,35 @@
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
-import recordings from "../recordings";
+import axios from "axios";
 
 const RecordingScreen = () => {
+  const [recording, setRecording] = useState({});
+
   const { id: recordingId } = useParams();
-  const recording = recordings.find((r) => r._id === recordingId);
+
+  useEffect(() => {
+    const fetchRecording = async () => {
+      const { data } = await axios.get(`/api/recordings/${recordingId}`);
+      setRecording(data);
+    };
+
+    fetchRecording();
+  }, [recordingId]);
 
   return (
-    <>
-      <Link className="btn btn-secondary my-3" to="/">
+    <div className="recordingDetail">
+      <Link className="btn btn-secondary my-3" to="/recordings">
         Go Back
       </Link>
       <Row>
-        <Col md={3}>
+        <Col lg={3} md={12} className="text-center">
           <Image
             src={recording.coverImage}
             alt={recording.composition}
             fluid
             style={{
-              width: "300px",
-              height: "300px",
               border: "1px solid #000",
             }}
             className="mt-5"
@@ -106,7 +115,7 @@ const RecordingScreen = () => {
           </ListGroup>
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
 export default RecordingScreen;

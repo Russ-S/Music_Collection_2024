@@ -1,6 +1,13 @@
 import express from "express";
-import recordings from "./data/recordings.js";
-const port = 5000;
+import dotenv from "dotenv";
+dotenv.config();
+import connectDB from "./config/db.js";
+import { notFound, errorHandler } from "./middleware/errorMiddlware.js";
+import recordingRoutes from "./routes/recordingRoutes.js";
+import performanceRoutes from "./routes/performanceRoutes.js";
+const port = process.env.PORT || 5000;
+
+connectDB(); // connect to MongoDB
 
 const app = express();
 
@@ -8,13 +15,10 @@ app.get("/", (req, res) => {
   res.send("API is running...");
 });
 
-app.get("/api/recordings", (req, res) => {
-  res.json(recordings);
-});
+app.use("/api/recordings", recordingRoutes);
+app.use("/api/performances", performanceRoutes);
 
-app.get("/api/recordings/:id", (req, res) => {
-  const recording = recordings.find((r) => r._id === req.params.id);
-  res.json(recording);
-});
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(port, () => console.log(`Server running on port ${port}`));

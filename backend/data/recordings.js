@@ -20,7 +20,6 @@ const recordings = [
     location: "Cortez, CO",
   },
   {
-    _id: "2",
     composer: "Albéniz, Issac (1860-1909)",
     coverImage: "/covers/Albeniz-Iberia.jpg",
     composition: "Iberia (suite for piano, 4 books) (1906-1908)",
@@ -40,7 +39,6 @@ const recordings = [
     location: "Cortez, CO",
   },
   {
-    _id: "3",
     composer: "Adams, John (1947-    )",
     coverImage: "/covers/john_adams-fearful-symmetries.jpg",
     composition: "The Wound Dresser",
@@ -61,7 +59,6 @@ const recordings = [
     location: "Cortez, CO",
   },
   {
-    _id: "4",
     composer: "Adams, John (1947-    )",
     coverImage: "/covers/john_adams-fearful-symmetries.jpg",
     composition: "Fearful Symmetries",
@@ -81,7 +78,6 @@ const recordings = [
     location: "Cortez, CO",
   },
   {
-    _id: "5",
     composer: "Tchaikovsky, Peter (1840-1893)",
     coverImage: "/covers/Tchaikovsky-Donohoe.jpg",
     composition:
@@ -103,7 +99,6 @@ const recordings = [
     location: "Cortez, CO",
   },
   {
-    _id: "6",
     composer: "Tchaikovsky, Peter (1840-1893)",
     coverImage: "/covers/Tchaikovsky-Donohoe.jpg",
     composition:
@@ -124,7 +119,6 @@ const recordings = [
     location: "Cortez, CO",
   },
   {
-    _id: "7",
     composer: "Orff, Carl (1895-1982)",
     coverImage: "/covers/no-image.jpg",
     composition: "Carmina Burana",
@@ -140,12 +134,11 @@ const recordings = [
     label: "",
     catalogNumber: "",
     purchaseDate: "1973-08-20",
-    value: "0",
+    value: "0.00",
     tapeNumber: "RR00014",
     location: "Cortez, CO",
   },
   {
-    _id: "8",
     composer: "Brahms, Johannes (1833-1897)",
     coverImage: "/covers/Brahms-Katchen.jpg",
     composition: "Variations and Fugue on a Theme by Handel, Op. 24",
@@ -160,12 +153,11 @@ const recordings = [
     label: "Ace of Diamonds Records",
     catalogNumber: "SDD 538",
     purchaseDate: "2003-05-17",
-    value: "0",
+    value: "0.00",
     tapeNumber: "",
     location: "Cortez, CO",
   },
   {
-    _id: "9",
     composer: "Brahms, Johannes (1833-1897)",
     coverImage: "/covers/Brahms-Katchen.jpg",
     composition: "Variations on a Theme of Paganini, Op. 35 (Books 1 and 2)",
@@ -180,7 +172,7 @@ const recordings = [
     label: "Ace of Diamonds Records",
     catalogNumber: "SDD 538",
     purchaseDate: "2003-05-17",
-    value: "",
+    value: "0.00",
     tapeNumber: "",
     location: "Cortez, CO",
   },

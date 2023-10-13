@@ -1,19 +1,48 @@
 import { Row, Col } from "react-bootstrap";
-import Recording from "../components/Recording";
-import recordings from "../recordings";
+import { Link } from "react-router-dom";
 
 const HomeScreen = () => {
   return (
-    <>
-      <h1>Recordings</h1>
-      <Row>
-        {recordings.map((recording) => (
-          <Col key={recording._id} sm={6} md={6} lg={4} xl={3}>
-            <Recording recording={recording} />
-          </Col>
-        ))}
-      </Row>
-    </>
+    <div className="homePage">
+      <div className="links">
+        <Link className="btn btn-link my-3 me-5" to="/recordings">
+          All Recordings
+        </Link>
+        <Link className="btn btn-link my-3 me-5" to="/recordings">
+          Compact Discs
+        </Link>
+        <Link className="btn btn-link my-3 me-5" to="/recordings">
+          CD-Recordables
+        </Link>
+        <Link className="btn btn-link my-3 me-5" to="/recordings">
+          Cassettes
+        </Link>
+        <Link className="btn btn-link my-3 me-5" to="/recordings">
+          LP Albums
+        </Link>
+        <Link className="btn btn-link my-3 me-5" to="/recordings">
+          Reel-to-Reels
+        </Link>
+        {/* <Link className="btn btn-link my-3 me-5" to="/composers">
+        Composers
+      </Link>
+      <Link className="btn btn-link my-3 me-5" to="/labels">
+        Labels
+      </Link>
+      <Link className="btn btn-link my-3 me-5" to="/media">
+        Media
+      </Link> */}
+        <Link className="btn btn-link my-3 me-5" to="/performances">
+          Performances
+        </Link>
+      </div>
+      <div className="homePageTitle">
+        <h3 className="mainTitle text-center">
+          Classical Music Collection & Performance Catalog 2024
+        </h3>
+        <h5 className="mainSubtitle text-center">Version 11.0</h5>
+      </div>
+    </div>
   );
 };
 export default HomeScreen;
