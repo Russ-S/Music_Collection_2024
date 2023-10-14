@@ -1,30 +1,32 @@
-import { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import Recording from "../components/Recording";
-import axios from "axios";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+import { useGetRecordingsQuery } from "../slices/recordingsApiSlice";
 
 const RecordingScreen = () => {
-  const [recordings, setRecordings] = useState([]);
-
-  useEffect(() => {
-    const fetchRecordings = async () => {
-      const { data } = await axios.get("/api/recordings");
-      setRecordings(data);
-    };
-
-    fetchRecordings();
-  }, []);
+  const { data: recordings, isLoading, error } = useGetRecordingsQuery();
 
   return (
     <>
-      <h2 className="text-white">All Recordings</h2>
-      <Row>
-        {recordings.map((recording) => (
-          <Col key={recording._id} sm={6} md={6} lg={4} xl={3}>
-            <Recording recording={recording} />
-          </Col>
-        ))}
-      </Row>
+      {isLoading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">
+          {error?.data?.message || error.error}
+        </Message>
+      ) : (
+        <>
+          <h2 className="text-white">All Recordings</h2>
+          <Row>
+            {recordings.map((recording) => (
+              <Col key={recording._id} sm={6} md={6} lg={4} xl={3}>
+                <Recording recording={recording} />
+              </Col>
+            ))}
+          </Row>
+        </>
+      )}
     </>
   );
 };
