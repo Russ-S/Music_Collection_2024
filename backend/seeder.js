@@ -7,10 +7,10 @@ import performances from "./data/performances.js";
 import User from "./models/userModel.js";
 import Recording from "./models/recordingModel.js";
 import Performance from "./models/performanceModel.js";
-import Category from "./models/recordingModel.js";
+import Category from "./models/categoryModel.js";
 import Composer from "./models/composerModel.js";
 import Label from "./models/labelModel.js";
-import Media from "./models/media.Model.js";
+import Media from "./models/mediaModel.js";
 import connectDB from "./config/db.js";
 
 dotenv.config();

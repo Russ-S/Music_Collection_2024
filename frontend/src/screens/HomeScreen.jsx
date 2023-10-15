@@ -23,19 +23,21 @@ const HomeScreen = () => {
         <Link className="btn btn-link my-3 me-5" to="/recordings">
           Reel-to-Reels
         </Link>
-        {/* <Link className="btn btn-link my-3 me-5" to="/composers">
-        Composers
-      </Link>
-      <Link className="btn btn-link my-3 me-5" to="/labels">
-        Labels
-      </Link>
-      <Link className="btn btn-link my-3 me-5" to="/media">
-        Media
-      </Link> */}
         <Link className="btn btn-link my-3 me-5" to="/performances">
           Performances
         </Link>
       </div>
+      {/* <div className="links2">
+        <Link className="btn btn-link2 my-3 me-5" to="/composers">
+          Composers
+        </Link>
+        <Link className="btn btn-link2 my-3 me-5" to="/labels">
+          Labels
+        </Link>
+        <Link className="btn btn-link2 my-3 me-5" to="/media">
+          Media
+        </Link>
+      </div> */}
       <div className="homePageTitle">
         <h3 className="mainTitle text-center">
           Classical Music Collection & Performance Catalog 2024

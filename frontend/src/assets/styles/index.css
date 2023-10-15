@@ -28,17 +28,39 @@ main {
   align-items: center;
   justify-content: center;
 }
+.links2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
 .btn-link {
   border: 1px solid white;
   background: #000;
   color: #fff;
   font-weight: bold;
   text-decoration: none;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 10px 15px;
+  border-radius: 2rem;
   transition: 0.5s ease-in-out;
 }
 .btn-link:hover {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+.btn-link2 {
+  border: 1px solid white;
+  background: #000;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px;
+  width: 150px;
+  border-radius: 2rem;
+  transition: 0.5s ease-in-out;
+}
+.btn-link2:hover {
   background: #fff;
   color: #000;
   border: 1px solid #000;

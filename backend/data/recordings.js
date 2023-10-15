@@ -1,6 +1,5 @@
 const recordings = [
   {
-    _id: "1",
     composer: "Albéniz, Issac (1860-1909)",
     coverImage: "/covers/Albeniz-Iberia.jpg",
     composition: "Navarra completed by Déodat de Séverac",
