@@ -16,9 +16,6 @@ main {
 }
 
 /* Home page */
-/* .homePage {
-  padding-top: 250px;
-} */
 .homePageTitle {
   margin-top: 200px;
 }
@@ -100,6 +97,13 @@ main {
     transform: translateX(0);
   }
 }
+.loginForm,
+.registerForm {
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
 .performanceDetail {
   background: #fff;
   padding: 20px 20px 50px 20px;
