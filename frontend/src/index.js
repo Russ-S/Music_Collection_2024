@@ -22,6 +22,7 @@ import ComposerScreen from "./screens/ComposerScreen";
 import LabelScreen from "./screens/LabelScreen";
 import MediaScreen from "./screens/MediaScreen";
 import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
       <Route path="/labels" element={<LabelScreen />} />
       <Route path="/media" element={<MediaScreen />} />
       <Route path="/login" element={<LoginScreen />} />
+      <Route path="/register" element={<RegisterScreen />} />
     </Route>
   )
 );
