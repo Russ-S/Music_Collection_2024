@@ -7,12 +7,13 @@ import {
   updateCategory,
   deleteCategory,
 } from "../controllers/categoryController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
-router.route("/").post(createCategory).get(getCategories);
+router.route("/").post(protect, createCategory).get(getCategories);
 router
   .route("/:id")
-  .delete(deleteCategory)
-  .get(getCategoryById)
-  .put(updateCategory);
+  .delete(protect, deleteCategory)
+  .get(protect, getCategoryById)
+  .put(protect, updateCategory);
 
 export default router;

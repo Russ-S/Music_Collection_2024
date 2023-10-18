@@ -7,8 +7,13 @@ import {
   updateMedia,
   deleteMedia,
 } from "../controllers/mediaController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
-router.route("/").post(createMedia).get(getMedia);
-router.route("/:id").delete(deleteMedia).get(getMediaById).put(updateMedia);
+router.route("/").post(protect, createMedia).get(protect, getMedia);
+router
+  .route("/:id")
+  .delete(protect, deleteMedia)
+  .get(protect, getMediaById)
+  .put(protect, updateMedia);
 
 export default router;

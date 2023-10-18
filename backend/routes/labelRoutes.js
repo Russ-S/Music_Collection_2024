@@ -7,8 +7,13 @@ import {
   updateLabel,
   deleteLabel,
 } from "../controllers/labelController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
-router.route("/").post(createLabel).get(getLabels);
-router.route("/:id").delete(deleteLabel).get(getLabelById).put(updateLabel);
+router.route("/").post(protect, createLabel).get(protect, getLabels);
+router
+  .route("/:id")
+  .delete(protect, deleteLabel)
+  .get(protect, getLabelById)
+  .put(protect, updateLabel);
 
 export default router;

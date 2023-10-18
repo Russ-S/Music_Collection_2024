@@ -5,35 +5,70 @@ import Category from "../models/categoryModel.js";
 // @route   POST /api/categories
 // @access  Private/Admin
 const createCategory = asyncHandler(async (req, res) => {
-  res.send("create category");
+  const category = new Category({
+    name: req.body.name,
+  });
+
+  const createdCategory = await category.save();
+  res.status(201).json(createdCategory);
 });
 
 // @desc    Get categories
 // @route   GET /api/categories
 // @access  Private/Admin
 const getCategories = asyncHandler(async (req, res) => {
-  res.send("get categories");
+  const categories = await Category.find({}).sort({
+    name: 1,
+  });
+  res.json(categories);
 });
 
 // @desc    Get category by ID
 // @route   GET /api/categories/:id
 // @access  Private/Admin
 const getCategoryById = asyncHandler(async (req, res) => {
-  res.send("get category by ID");
+  const category = await Category.findById(req.params.id);
+
+  if (category) {
+    return res.json(category);
+  } else {
+    res.status(404);
+    throw new Error("Category not found");
+  }
 });
 
 // @desc    Update categories
 // @route   PUT /api/categories/:id
 // @access  Private/Admin
 const updateCategory = asyncHandler(async (req, res) => {
-  res.send("update category");
+  const { name } = req.body;
+
+  const category = await Category.findById(req.params.id);
+
+  if (category) {
+    category.name = name;
+
+    const updatedCategory = await category.save();
+    res.json(updatedCategory);
+  } else {
+    res.status(404);
+    throw new Error("Resource not found");
+  }
 });
 
 // @desc    Delete categories
 // @route   DELETE /api/categories/:id
 // @access  Private/Admin
 const deleteCategory = asyncHandler(async (req, res) => {
-  res.send("delete category");
+  const category = await Category.findById(req.params.id);
+
+  if (category) {
+    await Category.deleteOne({ _id: category._id });
+    res.status(200).json({ message: "Category deleted" });
+  } else {
+    res.status(404);
+    throw new Error("Resource not found");
+  }
 });
 
 export {

@@ -3,6 +3,13 @@ import { apiSlice } from "./apiSlice";
 
 export const performancesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    createPerformance: builder.mutation({
+      query: (performance) => ({
+        url: PERFORMANCES_URL,
+        method: "POST",
+        body: { ...performance },
+      }),
+    }),
     getPerformances: builder.query({
       query: () => ({
         url: PERFORMANCES_URL,
@@ -18,5 +25,8 @@ export const performancesApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetPerformancesQuery, useGetPerformanceDetailQuery } =
-  performancesApiSlice;
+export const {
+  useCreatePerformanceMutation,
+  useGetPerformancesQuery,
+  useGetPerformanceDetailQuery,
+} = performancesApiSlice;

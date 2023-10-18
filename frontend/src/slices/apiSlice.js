@@ -9,6 +9,7 @@ export const apiSlice = createApi({
     "Recording",
     "Performances",
     "User",
+    "Categories",
     "Composers",
     "Media",
     "Labels",

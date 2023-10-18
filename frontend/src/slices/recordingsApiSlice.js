@@ -3,6 +3,13 @@ import { apiSlice } from "./apiSlice";
 
 export const recordingsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    createRecording: builder.mutation({
+      query: (recording) => ({
+        url: RECORDINGS_URL,
+        method: "POST",
+        body: { ...recording },
+      }),
+    }),
     getRecordings: builder.query({
       query: () => ({
         url: RECORDINGS_URL,
@@ -18,5 +25,8 @@ export const recordingsApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetRecordingsQuery, useGetRecordingDetailQuery } =
-  recordingsApiSlice;
+export const {
+  useCreateRecordingMutation,
+  useGetRecordingsQuery,
+  useGetRecordingDetailQuery,
+} = recordingsApiSlice;

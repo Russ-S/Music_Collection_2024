@@ -5,35 +5,70 @@ import Media from "../models/mediaModel.js";
 // @route   POST /api/media
 // @access  Private/Admin
 const createMedia = asyncHandler(async (req, res) => {
-  res.send("create media");
+  const media = new Media({
+    name: req.body.name,
+  });
+
+  const createdMedia = await media.save();
+  res.status(201).json(createdMedia);
 });
 
 // @desc    Get media
 // @route   GET /api/media
 // @access  Private/Admin
 const getMedia = asyncHandler(async (req, res) => {
-  res.send("get media");
+  const media = await Media.find({}).sort({
+    name: 1,
+  });
+  res.json(media);
 });
 
 // @desc    Get media by ID
 // @route   GET /api/media/:id
 // @access  Private/Admin
 const getMediaById = asyncHandler(async (req, res) => {
-  res.send("get media by ID");
+  const media = await Media.findById(req.params.id);
+
+  if (media) {
+    return res.json(media);
+  } else {
+    res.status(404);
+    throw new Error("Media type not found");
+  }
 });
 
 // @desc    Update media
 // @route   PUT /api/media/:id
 // @access  Private/Admin
 const updateMedia = asyncHandler(async (req, res) => {
-  res.send("update media");
+  const { name } = req.body;
+
+  const media = await Media.findById(req.params.id);
+
+  if (media) {
+    media.name = name;
+
+    const updatedMedia = await media.save();
+    res.json(updatedMedia);
+  } else {
+    res.status(404);
+    throw new Error("Resource not found");
+  }
 });
 
 // @desc    Delete media
 // @route   DELETE /api/medias/:id
 // @access  Private/Admin
 const deleteMedia = asyncHandler(async (req, res) => {
-  res.send("delete media");
+  const media = await Media.findById(req.params.id);
+
+  if (media) {
+    await Media.deleteOne({ _id: media._id });
+    res.status(200).json({ message: "Media type deleted" });
+  } else {
+    res.status(404);
+    throw new Error("Resource not found");
+  }
 });
 
 export { createMedia, getMedia, getMediaById, updateMedia, deleteMedia };

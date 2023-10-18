@@ -109,6 +109,17 @@ main {
 .registerForm {
   margin-top: 75px;
 }
+.profileForm {
+  margin-top: 75px;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.propertyList {
+  padding: 10px 20px;
+  background-color: #fff;
+  border-radius: 10px;
+}
 
 .performanceDetail {
   background: #fff;
