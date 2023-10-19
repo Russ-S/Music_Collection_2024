@@ -64,7 +64,7 @@ const PerformanceScreen = () => {
                       <ListGroup.Item>
                         <h6>
                           <strong>Performance Date: </strong>{" "}
-                          {performance.performanceDate}
+                          {performance.performanceDate.substring(0, 10)}
                         </h6>
                         <h6>
                           <strong>Concert Hall: </strong>{" "}

@@ -5,25 +5,30 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
 import {
-  useGetComposersQuery,
-  useCreateComposerMutation,
-  useDeleteComposerMutation,
-} from "../../slices/composersApiSlice";
+  useCreateRecordingMutation,
+  useGetRecordingsQuery,
+  useDeleteRecordingMutation,
+} from "../../slices/recordingsApiSlice";
 
-const ComposerListScreen = () => {
-  const { data: composers, isLoading, error, refetch } = useGetComposersQuery();
+const RecordingListScreen = () => {
+  const {
+    data: recordings,
+    isLoading,
+    error,
+    refetch,
+  } = useGetRecordingsQuery();
 
-  const [addComposer, { isLoading: loadingCreate }] =
-    useCreateComposerMutation();
+  const [addRecording, { isLoading: loadingCreate }] =
+    useCreateRecordingMutation();
 
-  const [deleteComposer, { isLoading: loadingDelete }] =
-    useDeleteComposerMutation();
+  const [deleteRecording, { isLoading: loadingDelete }] =
+    useDeleteRecordingMutation();
 
   const deleteHandler = async (id) => {
-    if (window.confirm("Are you sure?")) {
+    if (window.confirm("Are you sure you want to delete this recording?")) {
       try {
-        await deleteComposer(id);
-        toast.success("Composer deleted");
+        await deleteRecording(id);
+        toast.success("Recording deleted");
         refetch();
       } catch (err) {
         toast.error(err?.data?.message || err.error);
@@ -31,10 +36,10 @@ const ComposerListScreen = () => {
     }
   };
 
-  const addComposerHandler = async () => {
-    if (window.confirm("Are you sure you want to add a new composer?")) {
+  const addRecordingHandler = async () => {
+    if (window.confirm("Are you sure you want to add this recording?")) {
       try {
-        await addComposer();
+        await addRecording();
         refetch();
       } catch (err) {
         toast.error(err?.data?.message || err.error);
@@ -46,15 +51,15 @@ const ComposerListScreen = () => {
     <div className="propertyList">
       <Row className="align-items-center">
         <Col>
-          <h1>Composers</h1>
+          <h1>Recordings</h1>
         </Col>
         <Col className="text-end">
           <Button
             className="btn-sm m-3"
             variant="dark"
-            onClick={addComposerHandler}
+            onClick={addRecordingHandler}
           >
-            <FaEdit /> Add Composer
+            <FaEdit /> Add Recording
           </Button>
         </Col>
       </Row>
@@ -70,18 +75,26 @@ const ComposerListScreen = () => {
           <Table striped hover responsive className="table=sm">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>NAME</th>
+                <th>COMPOSER</th>
+                <th>COMPOSITION</th>
+                <th>CATEGORY</th>
+                <th>MEDIA</th>
+                <th>LOCATION</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {composers.map((composer) => (
-                <tr key={composer._id}>
-                  <td>{composer._id}</td>
-                  <td>{composer.name}</td>
+              {recordings.map((recording) => (
+                <tr key={recording._id}>
+                  <td className="text-start">{recording.composer}</td>
+                  <td className="text-start">{recording.composition}</td>
+                  <td>{recording.workCategory}</td>
+                  <td>{recording.media}</td>
+                  <td>{recording.location}</td>
                   <td>
-                    <LinkContainer to={`/admin/composer/${composer._id}/edit`}>
+                    <LinkContainer
+                      to={`/admin/recording/${recording._id}/edit`}
+                    >
                       <Button variant="light" className="btn-sm mx-2">
                         <FaEdit />
                       </Button>
@@ -89,7 +102,7 @@ const ComposerListScreen = () => {
                     <Button
                       variant="danger"
                       className="btn-sm"
-                      onClick={() => deleteHandler(composer._id)}
+                      onClick={() => deleteHandler(recording._id)}
                     >
                       <FaTrash style={{ color: "white" }} />
                     </Button>
@@ -103,4 +116,4 @@ const ComposerListScreen = () => {
     </div>
   );
 };
-export default ComposerListScreen;
+export default RecordingListScreen;

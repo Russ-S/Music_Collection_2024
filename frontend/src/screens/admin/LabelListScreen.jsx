@@ -47,8 +47,12 @@ const LabelListScreen = () => {
           <h1>Labels</h1>
         </Col>
         <Col className="text-end">
-          <Button className="btn-sm m-3" onClick={addLabelHandler}>
-            <FaEdit /> Add Composer
+          <Button
+            className="btn-sm m-3"
+            variant="dark"
+            onClick={addLabelHandler}
+          >
+            <FaEdit /> Add Label
           </Button>
         </Col>
       </Row>

@@ -51,7 +51,7 @@ const ComposerEditScreen = () => {
 
   return (
     <div className="propertyList">
-      <Link to="/admin/composerlist" className="btn btn-light my-2">
+      <Link to="/admin/composerlist" className="btn btn-secondary my-2">
         Go Back
       </Link>
       <FormContainer>

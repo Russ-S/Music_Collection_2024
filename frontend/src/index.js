@@ -14,6 +14,7 @@ import "./assets/styles/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import PrivateRoute from "./components/PrivateRoute";
+import AdminRoute from "./components/AdminRoute";
 import HomeScreen from "./screens/HomeScreen";
 import RecordingsScreen from "./screens/RecordingsScreen";
 import RecordingScreen from "./screens/RecordingScreen";
@@ -30,6 +31,10 @@ import MediaListScreen from "./screens/admin/MediaListScreen";
 import MediaEditScreen from "./screens/admin/MediaEditScreen";
 import CategoryListScreen from "./screens/admin/CategoryListScreen";
 import CategoryEditScreen from "./screens/admin/CategoryEditScreen";
+import RecordingListScreen from "./screens/admin/RecordingListScreen";
+import RecordingEditScreen from "./screens/admin/RecordingEditScreen";
+import PerformanceListScreen from "./screens/admin/PerformanceListScreen";
+import PerformanceEditScreen from "./screens/admin/PerformanceEditScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -45,6 +50,22 @@ const router = createBrowserRouter(
 
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<ProfileScreen />} />
+      </Route>
+
+      <Route path="" element={<AdminRoute />}>
+        <Route path="/admin/recordinglist" element={<RecordingListScreen />} />
+        <Route
+          path="/admin/recording/:id/edit"
+          element={<RecordingEditScreen />}
+        />
+        <Route
+          path="/admin/performancelist"
+          element={<PerformanceListScreen />}
+        />
+        <Route
+          path="/admin/performance/:id/edit"
+          element={<PerformanceEditScreen />}
+        />
         <Route path="/admin/composerlist" element={<ComposerListScreen />} />
         <Route
           path="/admin/composer/:id/edit"

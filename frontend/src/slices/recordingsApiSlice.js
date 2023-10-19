@@ -22,6 +22,20 @@ export const recordingsApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    updateRecording: builder.mutation({
+      query: (data) => ({
+        url: `${RECORDINGS_URL}/${data.recordingId}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Recordings"],
+    }),
+    deleteRecording: builder.mutation({
+      query: (recordingId) => ({
+        url: `${RECORDINGS_URL}/${recordingId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -29,4 +43,6 @@ export const {
   useCreateRecordingMutation,
   useGetRecordingsQuery,
   useGetRecordingDetailQuery,
+  useUpdateRecordingMutation,
+  useDeleteRecordingMutation,
 } = recordingsApiSlice;

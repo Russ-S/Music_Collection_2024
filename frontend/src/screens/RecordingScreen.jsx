@@ -72,7 +72,7 @@ const RecordingScreen = () => {
                         </h6>
                         <h6>
                           <strong>Purchased/Recorded: </strong>{" "}
-                          {recording.purchaseDate}
+                          {recording.purchaseDate.substring(0, 10)}
                         </h6>
                         <h6>
                           <strong>Value: </strong> ${recording.value}

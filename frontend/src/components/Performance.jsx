@@ -29,7 +29,7 @@ const Performance = ({ performance }) => {
 
         <div className="bg-warning d-flex justify-content-between rounded px-2">
           <span className="pull-left">
-            <strong>{performance.performanceDate}</strong>
+            <strong>{performance.performanceDate.substring(0, 10)}</strong>
           </span>
           <span className="pull-right">
             <strong>{performance.workCategory}</strong>

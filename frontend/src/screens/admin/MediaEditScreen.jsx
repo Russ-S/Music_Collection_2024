@@ -45,7 +45,7 @@ const MediaEditScreen = () => {
 
   return (
     <div className="propertyList">
-      <Link to="/admin/medialist" className="btn btn-light my-2">
+      <Link to="/admin/medialist" className="btn btn-secondary my-2">
         Go Back
       </Link>
       <FormContainer>

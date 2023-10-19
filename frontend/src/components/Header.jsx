@@ -53,6 +53,31 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title="Admin" id="adminmenu">
+                  <LinkContainer to="/admin/recordinglist">
+                    <NavDropdown.Item>Recordings</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/performancelist">
+                    <NavDropdown.Item>Performances</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/categorylist">
+                    <NavDropdown.Item>Categories</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/composerlist">
+                    <NavDropdown.Item>Composers</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/labellist">
+                    <NavDropdown.Item>Labels</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/medialist">
+                    <NavDropdown.Item>Media Types</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to="/admin/userlist">
+                    <NavDropdown.Item>Users</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -52,7 +52,7 @@ const MediaListScreen = () => {
             variant="dark"
             onClick={addMediaHandler}
           >
-            <FaEdit /> Add Media
+            <FaEdit /> Add Media Type
           </Button>
         </Col>
       </Row>

@@ -5,25 +5,30 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
 import {
-  useGetComposersQuery,
-  useCreateComposerMutation,
-  useDeleteComposerMutation,
-} from "../../slices/composersApiSlice";
+  useCreatePerformanceMutation,
+  useGetPerformancesQuery,
+  useDeletePerformanceMutation,
+} from "../../slices/performancesApiSlice";
 
-const ComposerListScreen = () => {
-  const { data: composers, isLoading, error, refetch } = useGetComposersQuery();
+const PerformanceListScreen = () => {
+  const {
+    data: performances,
+    isLoading,
+    error,
+    refetch,
+  } = useGetPerformancesQuery();
 
-  const [addComposer, { isLoading: loadingCreate }] =
-    useCreateComposerMutation();
+  const [addPerformance, { isLoading: loadingCreate }] =
+    useCreatePerformanceMutation();
 
-  const [deleteComposer, { isLoading: loadingDelete }] =
-    useDeleteComposerMutation();
+  const [deletePerformance, { isLoading: loadingDelete }] =
+    useDeletePerformanceMutation();
 
   const deleteHandler = async (id) => {
-    if (window.confirm("Are you sure?")) {
+    if (window.confirm("Are you sure you want to delete this performance?")) {
       try {
-        await deleteComposer(id);
-        toast.success("Composer deleted");
+        await deletePerformance(id);
+        toast.success("Performance deleted");
         refetch();
       } catch (err) {
         toast.error(err?.data?.message || err.error);
@@ -31,10 +36,10 @@ const ComposerListScreen = () => {
     }
   };
 
-  const addComposerHandler = async () => {
-    if (window.confirm("Are you sure you want to add a new composer?")) {
+  const addPerformanceHandler = async () => {
+    if (window.confirm("Are you sure you want to add this performance?")) {
       try {
-        await addComposer();
+        await addPerformance();
         refetch();
       } catch (err) {
         toast.error(err?.data?.message || err.error);
@@ -46,15 +51,15 @@ const ComposerListScreen = () => {
     <div className="propertyList">
       <Row className="align-items-center">
         <Col>
-          <h1>Composers</h1>
+          <h1>Performances</h1>
         </Col>
         <Col className="text-end">
           <Button
             className="btn-sm m-3"
             variant="dark"
-            onClick={addComposerHandler}
+            onClick={addPerformanceHandler}
           >
-            <FaEdit /> Add Composer
+            <FaEdit /> Add Performance
           </Button>
         </Col>
       </Row>
@@ -70,18 +75,24 @@ const ComposerListScreen = () => {
           <Table striped hover responsive className="table=sm">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>NAME</th>
+                <th>COMPOSER</th>
+                <th>COMPOSITION</th>
+                <th>CATEGORY</th>
+                <th>DATE</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {composers.map((composer) => (
-                <tr key={composer._id}>
-                  <td>{composer._id}</td>
-                  <td>{composer.name}</td>
+              {performances.map((performance) => (
+                <tr key={performance._id}>
+                  <td className="text-start">{performance.composer}</td>
+                  <td className="text-start">{performance.composition}</td>
+                  <td>{performance.workCategory}</td>
+                  <td>{performance.performanceDate.substring(0, 10)}</td>
                   <td>
-                    <LinkContainer to={`/admin/composer/${composer._id}/edit`}>
+                    <LinkContainer
+                      to={`/admin/performance/${performance._id}/edit`}
+                    >
                       <Button variant="light" className="btn-sm mx-2">
                         <FaEdit />
                       </Button>
@@ -89,7 +100,7 @@ const ComposerListScreen = () => {
                     <Button
                       variant="danger"
                       className="btn-sm"
-                      onClick={() => deleteHandler(composer._id)}
+                      onClick={() => deleteHandler(performance._id)}
                     >
                       <FaTrash style={{ color: "white" }} />
                     </Button>
@@ -103,4 +114,4 @@ const ComposerListScreen = () => {
     </div>
   );
 };
-export default ComposerListScreen;
+export default PerformanceListScreen;

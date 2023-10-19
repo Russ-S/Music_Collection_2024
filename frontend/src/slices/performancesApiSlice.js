@@ -22,6 +22,20 @@ export const performancesApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    updatePerformance: builder.mutation({
+      query: (data) => ({
+        url: `${PERFORMANCES_URL}/${data.performanceId}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Performances"],
+    }),
+    deletePerformance: builder.mutation({
+      query: (performanceId) => ({
+        url: `${PERFORMANCES_URL}/${performanceId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -29,4 +43,6 @@ export const {
   useCreatePerformanceMutation,
   useGetPerformancesQuery,
   useGetPerformanceDetailQuery,
+  useUpdatePerformanceMutation,
+  useDeletePerformanceMutation,
 } = performancesApiSlice;
