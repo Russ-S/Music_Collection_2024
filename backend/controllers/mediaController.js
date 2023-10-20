@@ -5,12 +5,28 @@ import Media from "../models/mediaModel.js";
 // @route   POST /api/media
 // @access  Private/Admin
 const createMedia = asyncHandler(async (req, res) => {
-  const media = new Media({
-    name: req.body.name,
+  const { name } = req.body;
+
+  const mediaExists = await Media.findOne({ name });
+
+  if (mediaExists) {
+    res.status(400);
+    throw new Error("Media type already exists");
+  }
+
+  const media = await Media.create({
+    name,
   });
 
-  const createdMedia = await media.save();
-  res.status(201).json(createdMedia);
+  if (media) {
+    res.status(201).json({
+      _id: media._id,
+      name: media.name,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Unable to add media type");
+  }
 });
 
 // @desc    Get media

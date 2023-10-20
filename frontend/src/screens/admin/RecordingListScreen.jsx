@@ -1,11 +1,11 @@
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
 import {
-  useCreateRecordingMutation,
   useGetRecordingsQuery,
   useDeleteRecordingMutation,
 } from "../../slices/recordingsApiSlice";
@@ -17,9 +17,6 @@ const RecordingListScreen = () => {
     error,
     refetch,
   } = useGetRecordingsQuery();
-
-  const [addRecording, { isLoading: loadingCreate }] =
-    useCreateRecordingMutation();
 
   const [deleteRecording, { isLoading: loadingDelete }] =
     useDeleteRecordingMutation();
@@ -36,17 +33,6 @@ const RecordingListScreen = () => {
     }
   };
 
-  const addRecordingHandler = async () => {
-    if (window.confirm("Are you sure you want to add this recording?")) {
-      try {
-        await addRecording();
-        refetch();
-      } catch (err) {
-        toast.error(err?.data?.message || err.error);
-      }
-    }
-  };
-
   return (
     <div className="propertyList">
       <Row className="align-items-center">
@@ -54,17 +40,12 @@ const RecordingListScreen = () => {
           <h1>Recordings</h1>
         </Col>
         <Col className="text-end">
-          <Button
-            className="btn-sm m-3"
-            variant="dark"
-            onClick={addRecordingHandler}
-          >
+          <Link className="btn btn-dark my-3" to="/admin/addrecording">
             <FaEdit /> Add Recording
-          </Button>
+          </Link>
         </Col>
       </Row>
 
-      {loadingCreate && <Loader />}
       {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />

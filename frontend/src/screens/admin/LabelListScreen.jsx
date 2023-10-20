@@ -1,4 +1,5 @@
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../components/Message";
@@ -6,14 +7,11 @@ import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
 import {
   useGetLabelsQuery,
-  useCreateLabelMutation,
   useDeleteLabelMutation,
 } from "../../slices/labelsApiSlice";
 
 const LabelListScreen = () => {
   const { data: labels, isLoading, error, refetch } = useGetLabelsQuery();
-
-  const [addLabel, { isLoading: loadingCreate }] = useCreateLabelMutation();
 
   const [deleteLabel, { isLoading: loadingDelete }] = useDeleteLabelMutation();
 
@@ -29,17 +27,6 @@ const LabelListScreen = () => {
     }
   };
 
-  const addLabelHandler = async () => {
-    if (window.confirm("Are you sure you want to add this label?")) {
-      try {
-        await addLabel();
-        refetch();
-      } catch (err) {
-        toast.error(err?.data?.message || err.error);
-      }
-    }
-  };
-
   return (
     <div className="propertyList">
       <Row className="align-items-center">
@@ -47,17 +34,12 @@ const LabelListScreen = () => {
           <h1>Labels</h1>
         </Col>
         <Col className="text-end">
-          <Button
-            className="btn-sm m-3"
-            variant="dark"
-            onClick={addLabelHandler}
-          >
+          <Link className="btn btn-dark my-3" to="/admin/addlabel">
             <FaEdit /> Add Label
-          </Button>
+          </Link>
         </Col>
       </Row>
 
-      {loadingCreate && <Loader />}
       {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />

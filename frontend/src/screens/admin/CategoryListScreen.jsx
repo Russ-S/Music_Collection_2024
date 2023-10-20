@@ -1,4 +1,5 @@
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../components/Message";
@@ -6,7 +7,6 @@ import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
 import {
   useGetCategoriesQuery,
-  useCreateCategoryMutation,
   useDeleteCategoryMutation,
 } from "../../slices/categoriesApiSlice";
 
@@ -17,9 +17,6 @@ const CategoryListScreen = () => {
     error,
     refetch,
   } = useGetCategoriesQuery();
-
-  const [addCategory, { isLoading: loadingCreate }] =
-    useCreateCategoryMutation();
 
   const [deleteCategory, { isLoading: loadingDelete }] =
     useDeleteCategoryMutation();
@@ -36,17 +33,6 @@ const CategoryListScreen = () => {
     }
   };
 
-  const addCategoryHandler = async () => {
-    if (window.confirm("Are you sure you want to add this category?")) {
-      try {
-        await addCategory();
-        refetch();
-      } catch (err) {
-        toast.error(err?.data?.message || err.error);
-      }
-    }
-  };
-
   return (
     <div className="propertyList">
       <Row className="align-items-center">
@@ -54,17 +40,12 @@ const CategoryListScreen = () => {
           <h1>Categories</h1>
         </Col>
         <Col className="text-end">
-          <Button
-            className="btn-sm m-3"
-            variant="dark"
-            onClick={addCategoryHandler}
-          >
+          <Link className="btn btn-dark my-3" to="/admin/addcategory">
             <FaEdit /> Add Category
-          </Button>
+          </Link>
         </Col>
       </Row>
 
-      {loadingCreate && <Loader />}
       {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />

@@ -25,16 +25,22 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ComposerListScreen from "./screens/admin/ComposerListScreen";
 import ComposerEditScreen from "./screens/admin/ComposerEditScreen";
+import AddComposerScreen from "./screens/admin/AddComposerScreen";
 import LabelListScreen from "./screens/admin/LabelListScreen";
 import LabelEditScreen from "./screens/admin/LabelEditScreen";
+import AddLabelScreen from "./screens/admin/AddLabelScreen";
 import MediaListScreen from "./screens/admin/MediaListScreen";
 import MediaEditScreen from "./screens/admin/MediaEditScreen";
+import AddMediaScreen from "./screens/admin/AddMediaScreen";
 import CategoryListScreen from "./screens/admin/CategoryListScreen";
 import CategoryEditScreen from "./screens/admin/CategoryEditScreen";
+import AddCategoryScreen from "./screens/admin/AddCategoryScreen";
 import RecordingListScreen from "./screens/admin/RecordingListScreen";
 import RecordingEditScreen from "./screens/admin/RecordingEditScreen";
+import AddRecordingScreen from "./screens/admin/AddRecordingScreen";
 import PerformanceListScreen from "./screens/admin/PerformanceListScreen";
 import PerformanceEditScreen from "./screens/admin/PerformanceEditScreen";
+import AddPerformanceScreen from "./screens/admin/AddPerformanceScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -58,6 +64,7 @@ const router = createBrowserRouter(
           path="/admin/recording/:id/edit"
           element={<RecordingEditScreen />}
         />
+        <Route path="/admin/addrecording" element={<AddRecordingScreen />} />
         <Route
           path="/admin/performancelist"
           element={<PerformanceListScreen />}
@@ -66,20 +73,32 @@ const router = createBrowserRouter(
           path="/admin/performance/:id/edit"
           element={<PerformanceEditScreen />}
         />
+        <Route
+          path="/admin/addperformance"
+          element={<AddPerformanceScreen />}
+        />
+
         <Route path="/admin/composerlist" element={<ComposerListScreen />} />
         <Route
           path="/admin/composer/:id/edit"
           element={<ComposerEditScreen />}
         />
+        <Route path="/admin/addcomposer" element={<AddComposerScreen />} />
+
         <Route path="/admin/categorylist" element={<CategoryListScreen />} />
         <Route
           path="/admin/category/:id/edit"
           element={<CategoryEditScreen />}
         />
+        <Route path="/admin/addcategory" element={<AddCategoryScreen />} />
+
         <Route path="/admin/labellist" element={<LabelListScreen />} />
         <Route path="/admin/label/:id/edit" element={<LabelEditScreen />} />
+        <Route path="/admin/addlabel" element={<AddLabelScreen />} />
+
         <Route path="admin/medialist" element={<MediaListScreen />} />
         <Route path="/admin/media/:id/edit" element={<MediaEditScreen />} />
+        <Route path="/admin/addmedia" element={<AddMediaScreen />} />
       </Route>
     </Route>
   )

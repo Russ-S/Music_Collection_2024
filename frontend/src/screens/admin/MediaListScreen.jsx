@@ -1,4 +1,5 @@
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../components/Message";
@@ -6,14 +7,14 @@ import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
 import {
   useGetMediaQuery,
-  useCreateMediaMutation,
+  // useCreateMediaMutation,
   useDeleteMediaMutation,
 } from "../../slices/mediaApiSlice";
 
 const MediaListScreen = () => {
   const { data: media, isLoading, error, refetch } = useGetMediaQuery();
 
-  const [addMedia, { isLoading: loadingCreate }] = useCreateMediaMutation();
+  // const [addMedia, { isLoading: loadingCreate }] = useCreateMediaMutation();
 
   const [deleteMedia, { isLoading: loadingDelete }] = useDeleteMediaMutation();
 
@@ -29,16 +30,16 @@ const MediaListScreen = () => {
     }
   };
 
-  const addMediaHandler = async () => {
-    if (window.confirm("Are you sure you want to add this media type?")) {
-      try {
-        await addMedia();
-        refetch();
-      } catch (err) {
-        toast.error(err?.data?.message || err.error);
-      }
-    }
-  };
+  // const addMediaHandler = async () => {
+  //   if (window.confirm("Are you sure you want to add this media type?")) {
+  //     try {
+  //       await addMedia();
+  //       refetch();
+  //     } catch (err) {
+  //       toast.error(err?.data?.message || err.error);
+  //     }
+  //   }
+  // };
 
   return (
     <div className="propertyList">
@@ -47,17 +48,13 @@ const MediaListScreen = () => {
           <h1>Media Types</h1>
         </Col>
         <Col className="text-end">
-          <Button
-            className="btn-sm m-3"
-            variant="dark"
-            onClick={addMediaHandler}
-          >
+          <Link className="btn btn-dark my-3" to="/admin/addmedia">
             <FaEdit /> Add Media Type
-          </Button>
+          </Link>
         </Col>
       </Row>
 
-      {loadingCreate && <Loader />}
+      {/* {loadingCreate && <Loader />} */}
       {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />

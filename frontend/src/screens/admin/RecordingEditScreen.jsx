@@ -129,7 +129,7 @@ const RecordingEditScreen = () => {
                   <Form.Label className="labelTop">Composition:</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter composer"
+                    placeholder="Enter composition"
                     value={composition}
                     onChange={(e) => setComposition(e.target.value)}
                   ></Form.Control>

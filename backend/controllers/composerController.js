@@ -5,12 +5,28 @@ import Composer from "../models/composerModel.js";
 // @route   POST /api/composers
 // @access  Private/Admin
 const createComposer = asyncHandler(async (req, res) => {
-  const composer = new Composer({
-    name: req.body.name,
+  const { name } = req.body;
+
+  const composerExists = await Composer.findOne({ name });
+
+  if (composerExists) {
+    res.status(400);
+    throw new Error("Composer already exists");
+  }
+
+  const composer = await Composer.create({
+    name,
   });
 
-  const createdComposer = await composer.save();
-  res.status(201).json(createdComposer);
+  if (composer) {
+    res.status(201).json({
+      _id: composer._id,
+      name: composer.name,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Unable to add composer");
+  }
 });
 
 // @desc    Get composers

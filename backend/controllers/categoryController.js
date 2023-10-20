@@ -5,12 +5,28 @@ import Category from "../models/categoryModel.js";
 // @route   POST /api/categories
 // @access  Private/Admin
 const createCategory = asyncHandler(async (req, res) => {
-  const category = new Category({
-    name: req.body.name,
+  const { name } = req.body;
+
+  const categoryExists = await Category.findOne({ name });
+
+  if (categoryExists) {
+    res.status(400);
+    throw new Error("Category already exists");
+  }
+
+  const category = await Category.create({
+    name,
   });
 
-  const createdCategory = await category.save();
-  res.status(201).json(createdCategory);
+  if (category) {
+    res.status(201).json({
+      _id: category._id,
+      name: category.name,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Unable to add category");
+  }
 });
 
 // @desc    Get categories

@@ -4,10 +4,10 @@ import { COMPOSERS_URL } from "../constants";
 export const composersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createComposer: builder.mutation({
-      query: (composer) => ({
-        url: COMPOSERS_URL,
+      query: (data) => ({
+        url: `${COMPOSERS_URL}`,
         method: "POST",
-        body: { ...composer },
+        body: data,
       }),
     }),
     getComposers: builder.query({

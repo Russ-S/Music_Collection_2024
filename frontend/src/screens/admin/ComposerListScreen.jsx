@@ -1,4 +1,5 @@
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../components/Message";
@@ -6,35 +7,20 @@ import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
 import {
   useGetComposersQuery,
-  useCreateComposerMutation,
   useDeleteComposerMutation,
 } from "../../slices/composersApiSlice";
 
 const ComposerListScreen = () => {
   const { data: composers, isLoading, error, refetch } = useGetComposersQuery();
 
-  const [addComposer, { isLoading: loadingCreate }] =
-    useCreateComposerMutation();
-
   const [deleteComposer, { isLoading: loadingDelete }] =
     useDeleteComposerMutation();
 
   const deleteHandler = async (id) => {
-    if (window.confirm("Are you sure?")) {
+    if (window.confirm("Are you sure you want to delete this composer?")) {
       try {
         await deleteComposer(id);
         toast.success("Composer deleted");
-        refetch();
-      } catch (err) {
-        toast.error(err?.data?.message || err.error);
-      }
-    }
-  };
-
-  const addComposerHandler = async () => {
-    if (window.confirm("Are you sure you want to add a new composer?")) {
-      try {
-        await addComposer();
         refetch();
       } catch (err) {
         toast.error(err?.data?.message || err.error);
@@ -49,17 +35,12 @@ const ComposerListScreen = () => {
           <h1>Composers</h1>
         </Col>
         <Col className="text-end">
-          <Button
-            className="btn-sm m-3"
-            variant="dark"
-            onClick={addComposerHandler}
-          >
+          <Link className="btn btn-dark my-3" to="/admin/addcomposer">
             <FaEdit /> Add Composer
-          </Button>
+          </Link>
         </Col>
       </Row>
 
-      {loadingCreate && <Loader />}
       {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />

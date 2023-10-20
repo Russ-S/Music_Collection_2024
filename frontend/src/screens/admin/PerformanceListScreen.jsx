@@ -1,11 +1,12 @@
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
 import {
-  useCreatePerformanceMutation,
+  // useCreatePerformanceMutation,
   useGetPerformancesQuery,
   useDeletePerformanceMutation,
 } from "../../slices/performancesApiSlice";
@@ -18,8 +19,8 @@ const PerformanceListScreen = () => {
     refetch,
   } = useGetPerformancesQuery();
 
-  const [addPerformance, { isLoading: loadingCreate }] =
-    useCreatePerformanceMutation();
+  // const [addPerformance, { isLoading: loadingCreate }] =
+  //   useCreatePerformanceMutation();
 
   const [deletePerformance, { isLoading: loadingDelete }] =
     useDeletePerformanceMutation();
@@ -36,16 +37,16 @@ const PerformanceListScreen = () => {
     }
   };
 
-  const addPerformanceHandler = async () => {
-    if (window.confirm("Are you sure you want to add this performance?")) {
-      try {
-        await addPerformance();
-        refetch();
-      } catch (err) {
-        toast.error(err?.data?.message || err.error);
-      }
-    }
-  };
+  // const addPerformanceHandler = async () => {
+  //   if (window.confirm("Are you sure you want to add this performance?")) {
+  //     try {
+  //       await addPerformance();
+  //       refetch();
+  //     } catch (err) {
+  //       toast.error(err?.data?.message || err.error);
+  //     }
+  //   }
+  // };
 
   return (
     <div className="propertyList">
@@ -54,17 +55,13 @@ const PerformanceListScreen = () => {
           <h1>Performances</h1>
         </Col>
         <Col className="text-end">
-          <Button
-            className="btn-sm m-3"
-            variant="dark"
-            onClick={addPerformanceHandler}
-          >
+          <Link className="btn btn-dark my-3" to="/admin/addperformance">
             <FaEdit /> Add Performance
-          </Button>
+          </Link>
         </Col>
       </Row>
 
-      {loadingCreate && <Loader />}
+      {/* {loadingCreate && <Loader />} */}
       {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />

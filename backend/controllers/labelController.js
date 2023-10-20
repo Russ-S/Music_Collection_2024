@@ -5,12 +5,28 @@ import Label from "../models/labelModel.js";
 // @route   POST /api/labels
 // @access  Private/Admin
 const createLabel = asyncHandler(async (req, res) => {
-  const label = new Label({
-    name: req.body.name,
+  const { name } = req.body;
+
+  const labelExists = await Label.findOne({ name });
+
+  if (labelExists) {
+    res.status(400);
+    throw new Error("Label already exists");
+  }
+
+  const label = await Label.create({
+    name,
   });
 
-  const createdLabel = await label.save();
-  res.status(201).json(createdLabel);
+  if (label) {
+    res.status(201).json({
+      _id: label._id,
+      name: label.name,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Unable to add label");
+  }
 });
 
 // @desc    Get labels
