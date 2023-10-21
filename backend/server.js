@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -11,6 +12,7 @@ import categoryRoutes from "./routes/categoryRoutes.js";
 import composerRoutes from "./routes/composerRoutes.js";
 import labelRoutes from "./routes/labelRoutes.js";
 import mediaRoutes from "./routes/mediaRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 
 const port = process.env.PORT || 5000;
 
@@ -36,6 +38,10 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/composers", composerRoutes);
 app.use("/api/labels", labelRoutes);
 app.use("/api/media", mediaRoutes);
+app.use("/api/upload", uploadRoutes);
+
+const __dirname = path.resolve(); // set __dirname to current directory
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 app.use(notFound);
 app.use(errorHandler);

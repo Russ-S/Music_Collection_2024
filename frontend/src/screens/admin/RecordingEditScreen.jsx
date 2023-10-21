@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import {
   useUpdateRecordingMutation,
   useGetRecordingDetailQuery,
+  useUploadCoverImageMutation,
 } from "../../slices/recordingsApiSlice";
 
 const RecordingEditScreen = () => {
@@ -38,6 +39,9 @@ const RecordingEditScreen = () => {
 
   const [updateRecording, { isLoading: loadingUpdate }] =
     useUpdateRecordingMutation();
+
+  const [uploadCoverImage, { isLoading: loadingUpload }] =
+    useUploadCoverImageMutation();
 
   const navigate = useNavigate();
 
@@ -92,6 +96,18 @@ const RecordingEditScreen = () => {
     } else {
       toast.success("Recording updated");
       navigate("/admin/recordinglist");
+    }
+  };
+
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    try {
+      const res = await uploadCoverImage(formData).unwrap();
+      toast.success(res.message);
+      setCoverImage(res.image);
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
     }
   };
 
@@ -153,9 +169,14 @@ const RecordingEditScreen = () => {
                   <Form.Label className="labelTop">Cover Image:</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Cover image"
+                    placeholder="Cover image url"
                     value={coverImage}
-                    onChange={(e) => setCoverImage(e.target.value)}
+                    onChange={(e) => setCoverImage}
+                  ></Form.Control>
+                  <Form.Control
+                    type="file"
+                    label="Choose file"
+                    onChange={uploadFileHandler}
                   ></Form.Control>
                 </div>
               </Form.Group>

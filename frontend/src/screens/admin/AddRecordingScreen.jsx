@@ -1,15 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
-// import { useGetComposersQuery } from "../../slices/composersApiSlice";
 
 const AddRecordingScreen = () => {
   // Select fields data
-  // const [composerData, setComposerData] = useState([]);
-  // const [categories, setCategoies] = useState([]);
-  // const [labels, setLabelData] = useState([]);
-  // const [mediaTypes, setMediaTypes] = useState([]);
+  const [composerData, setComposerData] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
+  const [labelData, setLabelData] = useState([]);
 
   // Field values
   const [composer, setComposer] = useState();
@@ -30,9 +28,47 @@ const AddRecordingScreen = () => {
   const [value, setValue] = useState();
   const [location, setLocation] = useState();
 
+  useEffect(() => {
+    const fetchComposerData = async () => {
+      const response = await fetch("/api/composers");
+      const json = await response.json();
+
+      if (response.ok) {
+        setComposerData(json);
+      }
+    };
+
+    fetchComposerData();
+  }, []);
+
+  useEffect(() => {
+    const fetchCategoryData = async () => {
+      const response = await fetch("/api/categories");
+      const json = await response.json();
+
+      if (response.ok) {
+        setCategoryData(json);
+      }
+    };
+
+    fetchCategoryData();
+  }, []);
+
+  useEffect(() => {
+    const fetchLabelData = async () => {
+      const response = await fetch("/api/labels");
+      const json = await response.json();
+
+      if (response.ok) {
+        setLabelData(json);
+      }
+    };
+
+    fetchLabelData();
+  }, []);
+
   const addRecordingHandler = async (e) => {
     e.preventDefault();
-
     const recording = {
       composer,
       coverImage,
@@ -110,14 +146,11 @@ const AddRecordingScreen = () => {
                   onChange={(e) => setComposer(e.target.value)}
                 >
                   <option>Select Composer</option>
-                  {/* {composers.map((composer) => (
+                  {composerData.map((composer) => (
                     <option key={composer._id} value={composer.name}>
                       {composer.name}
                     </option>
-                  ))} */}
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  ))}
                 </Form.Select>
               </div>
             </Form.Group>
@@ -190,26 +223,40 @@ const AddRecordingScreen = () => {
             <Form.Group controlId="workCategory" className="my-2">
               <div className="formRow">
                 <Form.Label className="labelName">Work Category:</Form.Label>
-                <Form.Control
+                <Form.Select
                   type="text"
-                  placeholder="Enter workCategory"
+                  placeholder="Select category"
                   required
                   value={workCategory}
                   onChange={(e) => setWorkCategory(e.target.value)}
-                ></Form.Control>
+                >
+                  <option>Select Category</option>
+                  {categoryData.map((category) => (
+                    <option key={category._id} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
+                </Form.Select>
               </div>
             </Form.Group>
 
             <Form.Group controlId="fileCategory" className="my-2">
               <div className="formRow">
                 <Form.Label className="labelName">File Category:</Form.Label>
-                <Form.Control
+                <Form.Select
                   type="text"
-                  placeholder="Enter file category"
+                  placeholder="Select category"
                   required
                   value={fileCategory}
                   onChange={(e) => setFileCategory(e.target.value)}
-                ></Form.Control>
+                >
+                  <option>Select Category</option>
+                  {categoryData.map((category) => (
+                    <option key={category._id} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
+                </Form.Select>
               </div>
             </Form.Group>
 
@@ -245,26 +292,40 @@ const AddRecordingScreen = () => {
             <Form.Group controlId="media" className="my-2">
               <div className="formRow">
                 <Form.Label className="labelName">Media:</Form.Label>
-                <Form.Control
+                <Form.Select
                   type="text"
-                  placeholder="Enter media type"
+                  placeholder="Select media type"
                   required
                   value={media}
                   onChange={(e) => setMedia(e.target.value)}
-                ></Form.Control>
+                >
+                  <option>Select Media Type</option>
+                  <option value="Compact Disc">Compact Disc</option>
+                  <option value="CD-Recordable">CD-Recordable</option>
+                  <option value="Cassette">Cassette</option>
+                  <option value="LP Album">LP Album</option>
+                  <option value="Reel-to-Reel">Reel-to-Reel Tape</option>
+                </Form.Select>
               </div>
             </Form.Group>
 
             <Form.Group controlId="label" className="my-2">
               <div className="formRow">
                 <Form.Label className="labelName">Label:</Form.Label>
-                <Form.Control
+                <Form.Select
                   type="text"
-                  placeholder="Enter label"
+                  placeholder="Select label"
                   required
-                  value={label}
+                  value={media}
                   onChange={(e) => setLabel(e.target.value)}
-                ></Form.Control>
+                >
+                  <option>Select Label</option>
+                  {labelData.map((label) => (
+                    <option key={label._id} value={label.name}>
+                      {label.name}
+                    </option>
+                  ))}
+                </Form.Select>
               </div>
             </Form.Group>
 
@@ -283,24 +344,40 @@ const AddRecordingScreen = () => {
             <Form.Group controlId="digital" className="my-2">
               <div className="formRow">
                 <Form.Label className="labelName">Digital Code:</Form.Label>
-                <Form.Control
+                <Form.Select
                   type="text"
-                  placeholder="Enter label"
+                  placeholder="Select digital"
+                  required
                   value={digital}
                   onChange={(e) => setDigital(e.target.value)}
-                ></Form.Control>
+                >
+                  <option>Select Digital Format</option>
+                  <option value="DDD">DDD</option>
+                  <option value="ADD">ADD</option>
+                  <option value="AAD">AAD</option>
+                  <option value="None">None</option>
+                </Form.Select>
               </div>
             </Form.Group>
 
             <Form.Group controlId="source" className="my-2">
               <div className="formRow">
                 <Form.Label className="labelName">Source:</Form.Label>
-                <Form.Control
+                <Form.Select
                   type="text"
-                  placeholder="Enter source"
+                  placeholder="Select source"
+                  required
                   value={source}
                   onChange={(e) => setSource(e.target.value)}
-                ></Form.Control>
+                >
+                  <option>Select Source</option>
+                  <option value="Compact Disc">Compact Disc</option>
+                  <option value="CD-Recordable">CD-Recordable</option>
+                  <option value="Cassette">Cassette</option>
+                  <option value="LP Album">LP Album</option>
+                  <option value="Radio Broadcast">Radio Broadcast</option>
+                  <option value="Reel-to-Reel">Reel-to-Reel Tape</option>
+                </Form.Select>
               </div>
             </Form.Group>
 
@@ -323,13 +400,17 @@ const AddRecordingScreen = () => {
             <Form.Group controlId="location" className="my-2">
               <div className="formRow">
                 <Form.Label className="labelName">Location:</Form.Label>
-                <Form.Control
+                <Form.Select
                   type="text"
-                  placeholder="Enter location"
+                  placeholder="Select location"
                   required
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                ></Form.Control>
+                >
+                  <option>Select Location</option>
+                  <option value="Cortez, CO">Cortez, CO</option>
+                  <option value="Fallston, MD">Fallston, MD</option>
+                </Form.Select>
               </div>
             </Form.Group>
           </Col>

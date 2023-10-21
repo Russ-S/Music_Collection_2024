@@ -8,7 +8,6 @@ const recordingSchema = new mongoose.Schema(
     },
     coverImage: {
       type: String,
-      default: "/covers/no-image.jpg",
     },
     composition: {
       type: String,

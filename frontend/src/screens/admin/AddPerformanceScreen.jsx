@@ -1,10 +1,14 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
-
 import { toast } from "react-toastify";
 
 const AddPerformanceScreen = () => {
+  // Select fields data
+  const [composerData, setComposerData] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
+
+  // Form field values
   const [performanceDate, setPerformanceDate] = useState("");
   const [composer, setComposer] = useState("");
   const [composition, setComposition] = useState("");
@@ -16,11 +20,35 @@ const AddPerformanceScreen = () => {
   const [state, setState] = useState("");
   const [workCategory, setWorkCategory] = useState("");
   const [notes, setNotes] = useState("");
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchComposerData = async () => {
+      const response = await fetch("/api/composers");
+      const json = await response.json();
+
+      if (response.ok) {
+        setComposerData(json);
+      }
+    };
+
+    fetchComposerData();
+  }, []);
+
+  useEffect(() => {
+    const fetchCategoryData = async () => {
+      const response = await fetch("/api/categories");
+      const json = await response.json();
+
+      if (response.ok) {
+        setCategoryData(json);
+      }
+    };
+
+    fetchCategoryData();
+  }, []);
 
   const addPerformanceHandler = async (e) => {
     e.preventDefault();
-
     const performance = {
       composer,
       performanceDate,
@@ -65,12 +93,20 @@ const AddPerformanceScreen = () => {
             <Form.Group controlId="composer" className="my-2">
               <div className="formRow">
                 <Form.Label className="labelTop">Composer:</Form.Label>
-                <Form.Control
+                <Form.Select
                   type="text"
-                  placeholder="Enter composer"
+                  placeholder="Select composer"
+                  required
                   value={composer}
                   onChange={(e) => setComposer(e.target.value)}
-                ></Form.Control>
+                >
+                  <option>Select Composer</option>
+                  {composerData.map((composer) => (
+                    <option key={composer._id} value={composer.name}>
+                      {composer.name}
+                    </option>
+                  ))}
+                </Form.Select>
               </div>
             </Form.Group>
 
@@ -80,6 +116,7 @@ const AddPerformanceScreen = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter composition"
+                  required
                   value={composition}
                   onChange={(e) => setComposition(e.target.value)}
                 ></Form.Control>
@@ -129,12 +166,20 @@ const AddPerformanceScreen = () => {
             <Form.Group controlId="workCategory" className="my-2">
               <div className="formRow">
                 <Form.Label className="labelName">Work Category:</Form.Label>
-                <Form.Control
+                <Form.Select
                   type="text"
-                  placeholder="Enter workCategory"
+                  placeholder="Select category"
+                  required
                   value={workCategory}
                   onChange={(e) => setWorkCategory(e.target.value)}
-                ></Form.Control>
+                >
+                  <option>Select Category</option>
+                  {categoryData.map((category) => (
+                    <option key={category._id} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
+                </Form.Select>
               </div>
             </Form.Group>
           </Col>
@@ -146,6 +191,7 @@ const AddPerformanceScreen = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter performance date"
+                  required
                   value={performanceDate}
                   onChange={(e) => setPerformanceDate(e.target.value)}
                 ></Form.Control>
@@ -158,6 +204,7 @@ const AddPerformanceScreen = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter concert hall"
+                  required
                   value={concertHall}
                   onChange={(e) => setConcertHall(e.target.value)}
                 ></Form.Control>
@@ -170,6 +217,7 @@ const AddPerformanceScreen = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter city"
+                  required
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                 ></Form.Control>
@@ -182,6 +230,7 @@ const AddPerformanceScreen = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter state"
+                  required
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                 ></Form.Control>

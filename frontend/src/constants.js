@@ -8,3 +8,4 @@ export const CATEGORIES_URL = "/api/categories";
 export const COMPOSERS_URL = "/api/composers";
 export const MEDIA_URL = "/api/media";
 export const LABELS_URL = "/api/labels";
+export const UPLOAD_URL = "/api/upload";

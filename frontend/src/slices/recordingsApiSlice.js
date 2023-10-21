@@ -1,4 +1,4 @@
-import { RECORDINGS_URL } from "../constants";
+import { RECORDINGS_URL, UPLOAD_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
 export const recordingsApiSlice = apiSlice.injectEndpoints({
@@ -30,6 +30,13 @@ export const recordingsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Recordings"],
     }),
+    uploadCoverImage: builder.mutation({
+      query: (data) => ({
+        url: `${UPLOAD_URL}`,
+        method: "POST",
+        body: data,
+      }),
+    }),
     deleteRecording: builder.mutation({
       query: (recordingId) => ({
         url: `${RECORDINGS_URL}/${recordingId}`,
@@ -45,4 +52,5 @@ export const {
   useGetRecordingDetailQuery,
   useUpdateRecordingMutation,
   useDeleteRecordingMutation,
+  useUploadCoverImageMutation,
 } = recordingsApiSlice;
