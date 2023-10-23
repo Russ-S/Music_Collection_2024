@@ -41,6 +41,8 @@ import AddRecordingScreen from "./screens/admin/AddRecordingScreen";
 import PerformanceListScreen from "./screens/admin/PerformanceListScreen";
 import PerformanceEditScreen from "./screens/admin/PerformanceEditScreen";
 import AddPerformanceScreen from "./screens/admin/AddPerformanceScreen";
+import UserListScreen from "./screens/admin/UserListScreen";
+import UserEditScreen from "./screens/admin/UserEditScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -99,6 +101,9 @@ const router = createBrowserRouter(
         <Route path="admin/medialist" element={<MediaListScreen />} />
         <Route path="/admin/media/:id/edit" element={<MediaEditScreen />} />
         <Route path="/admin/addmedia" element={<AddMediaScreen />} />
+
+        <Route path="/admin/userlist" element={<UserListScreen />} />
+        <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
       </Route>
     </Route>
   )

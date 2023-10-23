@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { useUploadCoverImageMutation } from "../../slices/recordingsApiSlice";
 
 const AddRecordingScreen = () => {
   // Select fields data
@@ -67,6 +68,9 @@ const AddRecordingScreen = () => {
     fetchLabelData();
   }, []);
 
+  const [uploadCoverImage, { isLoading: loadingUpload }] =
+    useUploadCoverImageMutation();
+
   const addRecordingHandler = async (e) => {
     e.preventDefault();
     const recording = {
@@ -121,6 +125,18 @@ const AddRecordingScreen = () => {
       setValue("");
       setLocation("");
       toast.success("Recording successfully added");
+    }
+  };
+
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    try {
+      const res = await uploadCoverImage(formData).unwrap();
+      toast.success(res.message);
+      setCoverImage(res.image);
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
     }
   };
 
@@ -181,7 +197,7 @@ const AddRecordingScreen = () => {
             </Form.Group>
 
             <Form.Group controlId="coverImage" className="my-2">
-              <div className="formRow">
+              {/* <div className="formRow">
                 <Form.Label className="labelTop">Cover Image:</Form.Label>
                 <Form.Control
                   type="text"
@@ -189,6 +205,26 @@ const AddRecordingScreen = () => {
                   value={coverImage}
                   onChange={(e) => setCoverImage(e.target.value)}
                 ></Form.Control>
+              </div> */}
+              <div className="formRow">
+                <Form.Label className="labelTop">Cover Image:</Form.Label>
+                <div className="imageInputs">
+                  <div className="imageLeft">
+                    <Form.Control
+                      type="text"
+                      placeholder="Cover image url"
+                      value={coverImage}
+                      onChange={(e) => setCoverImage}
+                    ></Form.Control>
+                  </div>
+                  <div className="imageRight">
+                    <Form.Control
+                      type="file"
+                      label="Choose file"
+                      onChange={uploadFileHandler}
+                    ></Form.Control>
+                  </div>
+                </div>
               </div>
             </Form.Group>
           </Col>
@@ -316,7 +352,7 @@ const AddRecordingScreen = () => {
                   type="text"
                   placeholder="Select label"
                   required
-                  value={media}
+                  value={label}
                   onChange={(e) => setLabel(e.target.value)}
                 >
                   <option>Select Label</option>

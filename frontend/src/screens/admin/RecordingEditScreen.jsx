@@ -167,17 +167,23 @@ const RecordingEditScreen = () => {
               <Form.Group controlId="coverImage" className="my-2">
                 <div className="formRow">
                   <Form.Label className="labelTop">Cover Image:</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Cover image url"
-                    value={coverImage}
-                    onChange={(e) => setCoverImage}
-                  ></Form.Control>
-                  <Form.Control
-                    type="file"
-                    label="Choose file"
-                    onChange={uploadFileHandler}
-                  ></Form.Control>
+                  <div className="imageInputs">
+                    <div className="imageLeft">
+                      <Form.Control
+                        type="text"
+                        placeholder="Cover image url"
+                        value={coverImage}
+                        onChange={(e) => setCoverImage}
+                      ></Form.Control>
+                    </div>
+                    <div className="imageRight">
+                      <Form.Control
+                        type="file"
+                        label="Choose file"
+                        onChange={uploadFileHandler}
+                      ></Form.Control>
+                    </div>
+                  </div>
                 </div>
               </Form.Group>
             </Col>

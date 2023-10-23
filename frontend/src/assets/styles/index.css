@@ -144,6 +144,15 @@ main {
   margin-top: 0.5rem;
   font-weight: 600;
 }
+.imageInputs {
+  display: flex;
+  align-items: center;
+  width: 75%;
+}
+.imageLeft,
+.imageRight {
+  width: 50%;
+}
 
 .performanceDetail {
   background: #fff;

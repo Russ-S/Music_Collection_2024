@@ -6,7 +6,6 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
 import {
-  // useCreatePerformanceMutation,
   useGetPerformancesQuery,
   useDeletePerformanceMutation,
 } from "../../slices/performancesApiSlice";
@@ -18,9 +17,6 @@ const PerformanceListScreen = () => {
     error,
     refetch,
   } = useGetPerformancesQuery();
-
-  // const [addPerformance, { isLoading: loadingCreate }] =
-  //   useCreatePerformanceMutation();
 
   const [deletePerformance, { isLoading: loadingDelete }] =
     useDeletePerformanceMutation();
@@ -37,17 +33,6 @@ const PerformanceListScreen = () => {
     }
   };
 
-  // const addPerformanceHandler = async () => {
-  //   if (window.confirm("Are you sure you want to add this performance?")) {
-  //     try {
-  //       await addPerformance();
-  //       refetch();
-  //     } catch (err) {
-  //       toast.error(err?.data?.message || err.error);
-  //     }
-  //   }
-  // };
-
   return (
     <div className="propertyList">
       <Row className="align-items-center">
@@ -61,7 +46,6 @@ const PerformanceListScreen = () => {
         </Col>
       </Row>
 
-      {/* {loadingCreate && <Loader />} */}
       {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />
