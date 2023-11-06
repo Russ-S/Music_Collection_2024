@@ -50,7 +50,7 @@ const getRecordings = asyncHandler(async (req, res) => {
 const getRecordingsSortList = asyncHandler(async (req, res) => {
   const items = await Recording.find({}).sort({
     composer: 1,
-    composotion: 1,
+    composition: 1,
   });
   res.json(items);
 });

@@ -8,19 +8,15 @@ export default function MultiFilters() {
 
   useEffect(() => {
     const fetchItems = async () => {
-      const res = await axios.get("/api/recordings");
-      setItems(res.data.recordings);
+      const res = await axios.get("/api/recordings/sortlist");
+      setItems(res.data);
     };
 
     fetchItems();
   }, []);
 
-  console.log(items);
-
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [filteredItems, setFilteredItems] = useState([items]);
-
-  console.log(items);
 
   let filters = [
     "Compact Disc",
