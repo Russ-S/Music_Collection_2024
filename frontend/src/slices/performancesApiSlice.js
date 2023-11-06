@@ -11,15 +11,20 @@ export const performancesApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     getPerformances: builder.query({
-      query: () => ({
+      query: ({ pageNumber }) => ({
         url: PERFORMANCES_URL,
+        params: {
+          pageNumber,
+        },
       }),
+
       keepUnusedDataFor: 5,
     }),
     getPerformanceDetail: builder.query({
       query: (performanceId) => ({
         url: `${PERFORMANCES_URL}/${performanceId}`,
       }),
+      providesTags: ["Performance"],
       keepUnusedDataFor: 5,
     }),
     updatePerformance: builder.mutation({

@@ -33,11 +33,26 @@ const createRecording = asyncHandler(async (req, res) => {
 // @route   GET /api/recordings
 // @access  Public
 const getRecordings = asyncHandler(async (req, res) => {
-  const recordings = await Recording.find({}).sort({
+  const pageSize = 12;
+  const page = Number(req.query.pageNumber) || 1;
+  const count = await Recording.countDocuments();
+
+  const recordings = await Recording.find({})
+    .sort({
+      composer: 1,
+      composition: 1,
+    })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res.json({ recordings, page, pages: Math.ceil(count / pageSize) });
+});
+
+const getRecordingsSortList = asyncHandler(async (req, res) => {
+  const items = await Recording.find({}).sort({
     composer: 1,
-    composition: 1,
+    composotion: 1,
   });
-  res.json(recordings);
+  res.json(items);
 });
 
 // @desc    Fetch a recording
@@ -129,4 +144,5 @@ export {
   getRecordingById,
   updateRecording,
   deleteRecording,
+  getRecordingsSortList,
 };

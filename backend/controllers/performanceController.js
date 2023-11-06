@@ -5,11 +5,18 @@ import Performance from "../models/performanceModel.js";
 // @route   GET /api/performances
 // @access  Public
 const getPerformances = asyncHandler(async (req, res) => {
-  const performances = await Performance.find({}).sort({
-    composer: 1,
-    composition: 1,
-  });
-  res.json(performances);
+  const pageSize = 9;
+  const page = Number(req.query.pageNumber) || 1;
+  const count = await Performance.countDocuments();
+
+  const performances = await Performance.find({})
+    .sort({
+      composer: 1,
+      composition: 1,
+    })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res.json({ performances, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Fetch a performance

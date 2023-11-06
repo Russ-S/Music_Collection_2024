@@ -11,8 +11,11 @@ export const composersApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     getComposers: builder.query({
-      query: () => ({
+      query: ({ pageNumber }) => ({
         url: COMPOSERS_URL,
+        params: {
+          pageNumber,
+        },
       }),
       providesTags: ["Composer"],
       keepUnusedDataFor: 5,
@@ -43,6 +46,7 @@ export const composersApiSlice = apiSlice.injectEndpoints({
 export const {
   useCreateComposerMutation,
   useGetComposersQuery,
+  useGetComposerFormListQuery,
   useGetComposerDetailsQuery,
   useUpdateComposerMutation,
   useDeleteComposerMutation,

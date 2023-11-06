@@ -5,23 +5,26 @@ const HomeScreen = () => {
     <div className="homePage">
       <div className="links">
         <Link className="btn btn-link my-3 me-5" to="/recordings">
-          All Recordings
+          Recordings
         </Link>
-        <Link className="btn btn-link my-3 me-5" to="/recordings">
+        {/* <Link className="btn btn-link my-3 me-5" to="/recordings/compactdiscs">
           Compact Discs
         </Link>
-        <Link className="btn btn-link my-3 me-5" to="/recordings">
+        <Link
+          className="btn btn-link my-3 me-5"
+          to="/recordings/cd-recordables"
+        >
           CD-Recordables
         </Link>
-        <Link className="btn btn-link my-3 me-5" to="/recordings">
+        <Link className="btn btn-link my-3 me-5" to="/recordings/cassettes">
           Cassettes
         </Link>
-        <Link className="btn btn-link my-3 me-5" to="/recordings">
+        <Link className="btn btn-link my-3 me-5" to="/recordings/lp-albums">
           LP Albums
         </Link>
-        <Link className="btn btn-link my-3 me-5" to="/recordings">
+        <Link className="btn btn-link my-3 me-5" to="/recordings/reels">
           Reel-to-Reels
-        </Link>
+        </Link> */}
         <Link className="btn btn-link my-3 me-5" to="/performances">
           Performances
         </Link>

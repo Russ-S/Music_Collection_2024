@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 
 const AddPerformanceScreen = () => {
   // Select fields data
-  const [composerData, setComposerData] = useState([]);
-  const [categoryData, setCategoryData] = useState([]);
+  const [composers, setComposers] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   // Form field values
   const [performanceDate, setPerformanceDate] = useState("");
@@ -22,29 +22,29 @@ const AddPerformanceScreen = () => {
   const [notes, setNotes] = useState("");
 
   useEffect(() => {
-    const fetchComposerData = async () => {
-      const response = await fetch("/api/composers");
+    const fetchComposers = async () => {
+      const response = await fetch("/api/composers/formlist");
       const json = await response.json();
 
       if (response.ok) {
-        setComposerData(json);
+        setComposers(json);
       }
     };
 
-    fetchComposerData();
+    fetchComposers();
   }, []);
 
   useEffect(() => {
-    const fetchCategoryData = async () => {
-      const response = await fetch("/api/categories");
+    const fetchCategories = async () => {
+      const response = await fetch("/api/categories/formlist");
       const json = await response.json();
 
       if (response.ok) {
-        setCategoryData(json);
+        setCategories(json);
       }
     };
 
-    fetchCategoryData();
+    fetchCategories();
   }, []);
 
   const addPerformanceHandler = async (e) => {
@@ -101,7 +101,7 @@ const AddPerformanceScreen = () => {
                   onChange={(e) => setComposer(e.target.value)}
                 >
                   <option>Select Composer</option>
-                  {composerData.map((composer) => (
+                  {composers.map((composer) => (
                     <option key={composer._id} value={composer.name}>
                       {composer.name}
                     </option>
@@ -174,7 +174,7 @@ const AddPerformanceScreen = () => {
                   onChange={(e) => setWorkCategory(e.target.value)}
                 >
                   <option>Select Category</option>
-                  {categoryData.map((category) => (
+                  {categories.map((category) => (
                     <option key={category._id} value={category.name}>
                       {category.name}
                     </option>

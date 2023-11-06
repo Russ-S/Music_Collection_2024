@@ -11,8 +11,11 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     getCategories: builder.query({
-      query: () => ({
+      query: ({ pageNumber }) => ({
         url: CATEGORIES_URL,
+        params: {
+          pageNumber,
+        },
       }),
       providesTags: ["Category"],
       keepUnusedDataFor: 5,

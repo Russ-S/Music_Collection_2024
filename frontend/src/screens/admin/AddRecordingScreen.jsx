@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
+import axios from "axios";
 import { useUploadCoverImageMutation } from "../../slices/recordingsApiSlice";
 
 const AddRecordingScreen = () => {
   // Select fields data
-  const [composerData, setComposerData] = useState([]);
-  const [categoryData, setCategoryData] = useState([]);
-  const [labelData, setLabelData] = useState([]);
+  const [composers, setComposers] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [labels, setLabels] = useState([]);
 
   // Field values
   const [composer, setComposer] = useState();
@@ -30,42 +31,30 @@ const AddRecordingScreen = () => {
   const [location, setLocation] = useState();
 
   useEffect(() => {
-    const fetchComposerData = async () => {
-      const response = await fetch("/api/composers");
-      const json = await response.json();
-
-      if (response.ok) {
-        setComposerData(json);
-      }
+    const fetchComposers = async () => {
+      const res = await axios.get("/api/composers/formlist");
+      setComposers(res.data);
     };
 
-    fetchComposerData();
+    fetchComposers();
   }, []);
 
   useEffect(() => {
-    const fetchCategoryData = async () => {
-      const response = await fetch("/api/categories");
-      const json = await response.json();
-
-      if (response.ok) {
-        setCategoryData(json);
-      }
+    const fetchCategories = async () => {
+      const res = await axios.get("/api/categories/formlist");
+      setCategories(res.data);
     };
 
-    fetchCategoryData();
+    fetchCategories();
   }, []);
 
   useEffect(() => {
-    const fetchLabelData = async () => {
-      const response = await fetch("/api/labels");
-      const json = await response.json();
-
-      if (response.ok) {
-        setLabelData(json);
-      }
+    const fetchLabels = async () => {
+      const res = await axios.get("/api/labels/formlist");
+      setLabels(res.data);
     };
 
-    fetchLabelData();
+    fetchLabels();
   }, []);
 
   const [uploadCoverImage, { isLoading: loadingUpload }] =
@@ -162,7 +151,7 @@ const AddRecordingScreen = () => {
                   onChange={(e) => setComposer(e.target.value)}
                 >
                   <option>Select Composer</option>
-                  {composerData.map((composer) => (
+                  {composers.map((composer) => (
                     <option key={composer._id} value={composer.name}>
                       {composer.name}
                     </option>
@@ -267,7 +256,7 @@ const AddRecordingScreen = () => {
                   onChange={(e) => setWorkCategory(e.target.value)}
                 >
                   <option>Select Category</option>
-                  {categoryData.map((category) => (
+                  {categories.map((category) => (
                     <option key={category._id} value={category.name}>
                       {category.name}
                     </option>
@@ -287,7 +276,7 @@ const AddRecordingScreen = () => {
                   onChange={(e) => setFileCategory(e.target.value)}
                 >
                   <option>Select Category</option>
-                  {categoryData.map((category) => (
+                  {categories.map((category) => (
                     <option key={category._id} value={category.name}>
                       {category.name}
                     </option>
@@ -356,7 +345,7 @@ const AddRecordingScreen = () => {
                   onChange={(e) => setLabel(e.target.value)}
                 >
                   <option>Select Label</option>
-                  {labelData.map((label) => (
+                  {labels.map((label) => (
                     <option key={label._id} value={label.name}>
                       {label.name}
                     </option>

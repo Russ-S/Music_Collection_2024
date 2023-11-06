@@ -70,9 +70,9 @@ const Header = () => {
                   <LinkContainer to="/admin/labellist">
                     <NavDropdown.Item>Labels</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to="/admin/medialist">
+                  {/* <LinkContainer to="/admin/medialist">
                     <NavDropdown.Item>Media Types</NavDropdown.Item>
-                  </LinkContainer>
+                  </LinkContainer> */}
                   <LinkContainer to="/admin/userlist">
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>

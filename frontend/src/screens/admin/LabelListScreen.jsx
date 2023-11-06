@@ -2,8 +2,10 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
+import PaginateLabels from "../../components/PaginateLabels";
 import { toast } from "react-toastify";
 import {
   useGetLabelsQuery,
@@ -11,7 +13,9 @@ import {
 } from "../../slices/labelsApiSlice";
 
 const LabelListScreen = () => {
-  const { data: labels, isLoading, error, refetch } = useGetLabelsQuery();
+  const { pageNumber } = useParams();
+
+  const { data, isLoading, error, refetch } = useGetLabelsQuery({ pageNumber });
 
   const [deleteLabel, { isLoading: loadingDelete }] = useDeleteLabelMutation();
 
@@ -56,7 +60,7 @@ const LabelListScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {labels.map((label) => (
+              {data.labels.map((label) => (
                 <tr key={label._id}>
                   <td>{label._id}</td>
                   <td>{label.name}</td>
@@ -78,6 +82,7 @@ const LabelListScreen = () => {
               ))}
             </tbody>
           </Table>
+          <PaginateLabels pages={data.pages} page={data.page} isAdmin={true} />
         </>
       )}
     </div>

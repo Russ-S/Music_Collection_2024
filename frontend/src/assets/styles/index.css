@@ -72,6 +72,11 @@ main {
   color: #000;
   border: 1px solid #000;
 }
+.activeMedia {
+  background: lightgray;
+  color: #000;
+  border: 1px solid #000;
+}
 
 .mainTitle {
   color: #fff;
@@ -106,6 +111,18 @@ main {
   100% {
     transform: translateX(0);
   }
+}
+
+/* Pagination */
+.page-link {
+  color: #000;
+  font-weight: 600;
+}
+.page-link.active,
+.active > .page-link {
+  font-weight: 600;
+  background-color: #000;
+  border-color: #000;
 }
 .loginForm,
 .registerForm {
@@ -170,6 +187,14 @@ main {
   flex: 1 1 auto;
   padding: 4px;
   color: var(--bs-card-color);
+}
+
+.items-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 table td,

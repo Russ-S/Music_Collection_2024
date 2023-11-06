@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Recording = ({ recording }) => {
   return (
-    <Card className="my-1 p-1 bg-light" style={{ height: "150px" }}>
+    <Card className="my-1 p-1 bg-light" style={{ height: "110px" }}>
       <Card.Body
         style={{
           display: "flex",
@@ -13,7 +13,7 @@ const Recording = ({ recording }) => {
       >
         <div>
           <Row>
-            <Col sm={4}>
+            {/* <Col sm={4}>
               <Link to={`/recording/${recording._id}`}>
                 <Card.Img
                   src={recording.coverImage}
@@ -25,9 +25,9 @@ const Recording = ({ recording }) => {
                   }}
                 />
               </Link>
-            </Col>
+            </Col> */}
 
-            <Col sm={8}>
+            <Col sm={12}>
               <Link to={`/recording/${recording._id}`}>
                 <Card.Text as="div" style={{ fontSize: "14px" }}>
                   <strong>{recording.composer}</strong>

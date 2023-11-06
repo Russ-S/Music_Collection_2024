@@ -2,8 +2,10 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
+import PaginateRecordings from "../../components/PaginateRecordings";
 import { toast } from "react-toastify";
 import {
   useGetRecordingsQuery,
@@ -11,12 +13,11 @@ import {
 } from "../../slices/recordingsApiSlice";
 
 const RecordingListScreen = () => {
-  const {
-    data: recordings,
-    isLoading,
-    error,
-    refetch,
-  } = useGetRecordingsQuery();
+  const { pageNumber } = useParams();
+
+  const { data, isLoading, error, refetch } = useGetRecordingsQuery({
+    pageNumber,
+  });
 
   const [deleteRecording, { isLoading: loadingDelete }] =
     useDeleteRecordingMutation();
@@ -65,7 +66,7 @@ const RecordingListScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {recordings.map((recording) => (
+              {data.recordings.map((recording) => (
                 <tr key={recording._id}>
                   <td className="text-start">{recording.composer}</td>
                   <td className="text-start">{recording.composition}</td>
@@ -92,6 +93,11 @@ const RecordingListScreen = () => {
               ))}
             </tbody>
           </Table>
+          <PaginateRecordings
+            pages={data.pages}
+            page={data.page}
+            isAdmin={true}
+          />
         </>
       )}
     </div>

@@ -2,8 +2,10 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
+import PaginateCategories from "../../components/PaginateCategories";
 import { toast } from "react-toastify";
 import {
   useGetCategoriesQuery,
@@ -11,12 +13,11 @@ import {
 } from "../../slices/categoriesApiSlice";
 
 const CategoryListScreen = () => {
-  const {
-    data: categories,
-    isLoading,
-    error,
-    refetch,
-  } = useGetCategoriesQuery();
+  const { pageNumber } = useParams();
+
+  const { data, isLoading, error, refetch } = useGetCategoriesQuery({
+    pageNumber,
+  });
 
   const [deleteCategory, { isLoading: loadingDelete }] =
     useDeleteCategoryMutation();
@@ -62,7 +63,7 @@ const CategoryListScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {categories.map((category) => (
+              {data.categories.map((category) => (
                 <tr key={category._id}>
                   <td>{category._id}</td>
                   <td>{category.name}</td>
@@ -84,6 +85,11 @@ const CategoryListScreen = () => {
               ))}
             </tbody>
           </Table>
+          <PaginateCategories
+            pages={data.pages}
+            page={data.page}
+            isAdmin={true}
+          />
         </>
       )}
     </div>

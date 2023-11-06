@@ -2,8 +2,10 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
+import PaginatePerformances from "../../components/PaginatePerformances";
 import { toast } from "react-toastify";
 import {
   useGetPerformancesQuery,
@@ -11,12 +13,11 @@ import {
 } from "../../slices/performancesApiSlice";
 
 const PerformanceListScreen = () => {
-  const {
-    data: performances,
-    isLoading,
-    error,
-    refetch,
-  } = useGetPerformancesQuery();
+  const { pageNumber } = useParams();
+
+  const { data, isLoading, error, refetch } = useGetPerformancesQuery({
+    pageNumber,
+  });
 
   const [deletePerformance, { isLoading: loadingDelete }] =
     useDeletePerformanceMutation();
@@ -64,7 +65,7 @@ const PerformanceListScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {performances.map((performance) => (
+              {data.performances.map((performance) => (
                 <tr key={performance._id}>
                   <td className="text-start">{performance.composer}</td>
                   <td className="text-start">{performance.composition}</td>
@@ -90,9 +91,15 @@ const PerformanceListScreen = () => {
               ))}
             </tbody>
           </Table>
+          <PaginatePerformances
+            pages={data.pages}
+            page={data.page}
+            isAdmin={true}
+          />
         </>
       )}
     </div>
   );
 };
+
 export default PerformanceListScreen;

@@ -6,10 +6,12 @@ import {
   getComposerById,
   updateComposer,
   deleteComposer,
+  getComposersFormlist,
 } from "../controllers/composerController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 router.route("/").post(protect, createComposer).get(getComposers);
+router.route("/formlist").get(getComposersFormlist);
 router
   .route("/:id")
   .delete(protect, deleteComposer)

@@ -2,8 +2,10 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
+import PaginateComposers from "../../components/PaginateComposers";
 import { toast } from "react-toastify";
 import {
   useGetComposersQuery,
@@ -11,7 +13,11 @@ import {
 } from "../../slices/composersApiSlice";
 
 const ComposerListScreen = () => {
-  const { data: composers, isLoading, error, refetch } = useGetComposersQuery();
+  const { pageNumber } = useParams();
+
+  const { data, isLoading, error, refetch } = useGetComposersQuery({
+    pageNumber,
+  });
 
   const [deleteComposer, { isLoading: loadingDelete }] =
     useDeleteComposerMutation();
@@ -57,7 +63,7 @@ const ComposerListScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {composers.map((composer) => (
+              {data.composers.map((composer) => (
                 <tr key={composer._id}>
                   <td>{composer._id}</td>
                   <td>{composer.name}</td>
@@ -79,6 +85,11 @@ const ComposerListScreen = () => {
               ))}
             </tbody>
           </Table>
+          <PaginateComposers
+            pages={data.pages}
+            page={data.page}
+            isAdmin={true}
+          />
         </>
       )}
     </div>

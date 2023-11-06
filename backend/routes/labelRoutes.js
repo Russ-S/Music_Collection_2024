@@ -6,10 +6,12 @@ import {
   getLabelById,
   updateLabel,
   deleteLabel,
+  getLabelsFormlist,
 } from "../controllers/labelController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 router.route("/").post(protect, createLabel).get(protect, getLabels);
+router.route("/formlist").get(getLabelsFormlist);
 router
   .route("/:id")
   .delete(protect, deleteLabel)

@@ -11,8 +11,11 @@ export const labelsApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     getLabels: builder.query({
-      query: () => ({
+      query: ({ pageNumber }) => ({
         url: LABELS_URL,
+        params: {
+          pageNumber,
+        },
       }),
       providesTags: ["Label"],
       keepUnusedDataFor: 5,

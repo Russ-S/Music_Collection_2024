@@ -6,10 +6,12 @@ import {
   getCategoryById,
   updateCategory,
   deleteCategory,
+  getCategoriesFormlist,
 } from "../controllers/categoryController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 router.route("/").post(protect, createCategory).get(getCategories);
+router.route("/formlist").get(getCategoriesFormlist);
 router
   .route("/:id")
   .delete(protect, deleteCategory)

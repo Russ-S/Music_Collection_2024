@@ -11,6 +11,15 @@ export const recordingsApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     getRecordings: builder.query({
+      query: ({ pageNumber }) => ({
+        url: RECORDINGS_URL,
+        params: {
+          pageNumber,
+        },
+      }),
+      keepUnusedDataFor: 5,
+    }),
+    getRecordingsSortList: builder.query({
       query: () => ({
         url: RECORDINGS_URL,
       }),
@@ -49,6 +58,7 @@ export const recordingsApiSlice = apiSlice.injectEndpoints({
 export const {
   useCreateRecordingMutation,
   useGetRecordingsQuery,
+  useGetRecordingsSortListQuery,
   useGetRecordingDetailQuery,
   useUpdateRecordingMutation,
   useDeleteRecordingMutation,

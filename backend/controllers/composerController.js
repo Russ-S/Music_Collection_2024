@@ -33,13 +33,30 @@ const createComposer = asyncHandler(async (req, res) => {
 // @route   GET /api/composers
 // @access  Private/Admin
 const getComposers = asyncHandler(async (req, res) => {
+  const pageSize = 8;
+  const page = Number(req.query.pageNumber) || 1;
+  const count = await Composer.countDocuments();
+
+  const composers = await Composer.find({})
+    .sort({
+      name: 1,
+    })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res.json({ composers, page, pages: Math.ceil(count / pageSize) });
+});
+
+// @desc    Get composers for forms
+// @route   GET /api/composers/formlist
+// @access  Private/Admin
+const getComposersFormlist = asyncHandler(async (req, res) => {
   const composers = await Composer.find({}).sort({
     name: 1,
   });
   res.json(composers);
 });
 
-// @desc    Get compsoerby ID
+// @desc    Get composer by ID
 // @route   GET /api/composers/:id
 // @access  Private/Admin
 const getComposerById = asyncHandler(async (req, res) => {
@@ -89,6 +106,7 @@ const deleteComposer = asyncHandler(async (req, res) => {
 
 export {
   createComposer,
+  getComposersFormlist,
   getComposers,
   getComposerById,
   updateComposer,

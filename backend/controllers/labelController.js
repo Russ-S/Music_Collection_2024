@@ -33,6 +33,23 @@ const createLabel = asyncHandler(async (req, res) => {
 // @route   GET /api/labels
 // @access  Private/Admin
 const getLabels = asyncHandler(async (req, res) => {
+  const pageSize = 4;
+  const page = Number(req.query.pageNumber) || 1;
+  const count = await Label.countDocuments();
+
+  const labels = await Label.find({})
+    .sort({
+      name: 1,
+    })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res.json({ labels, page, pages: Math.ceil(count / pageSize) });
+});
+
+// @desc    Get labels for forms
+// @route   GET /api/labels/formlist
+// @access  Private/Admin
+const getLabelsFormlist = asyncHandler(async (req, res) => {
   const labels = await Label.find({}).sort({
     name: 1,
   });
@@ -87,4 +104,11 @@ const deleteLabel = asyncHandler(async (req, res) => {
   }
 });
 
-export { createLabel, getLabels, getLabelById, updateLabel, deleteLabel };
+export {
+  createLabel,
+  getLabels,
+  getLabelsFormlist,
+  getLabelById,
+  updateLabel,
+  deleteLabel,
+};
