@@ -33,7 +33,7 @@ const createCategory = asyncHandler(async (req, res) => {
 // @route   GET /api/categories
 // @access  Private/Admin
 const getCategories = asyncHandler(async (req, res) => {
-  const pageSize = 6;
+  const pageSize = 10;
   const page = Number(req.query.pageNumber) || 1;
   const count = await Category.countDocuments();
 
@@ -44,7 +44,6 @@ const getCategories = asyncHandler(async (req, res) => {
     .limit(pageSize)
     .skip(pageSize * (page - 1));
   res.json({ categories, page, pages: Math.ceil(count / pageSize) });
-  // res.json(categories);
 });
 
 // @desc    Get categories for forms
@@ -105,6 +104,13 @@ const deleteCategory = asyncHandler(async (req, res) => {
   }
 });
 
+const fetchCategories = asyncHandler(async (req, res) => {
+  const categories = await Category.find({}).sort({
+    name: 1,
+  });
+  res.json(categories);
+});
+
 export {
   createCategory,
   getCategories,
@@ -112,4 +118,5 @@ export {
   getCategoryById,
   updateCategory,
   deleteCategory,
+  fetchCategories,
 };

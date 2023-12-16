@@ -138,6 +138,39 @@ const deleteRecording = asyncHandler(async (req, res) => {
   }
 });
 
+const fetchAllRecordings = asyncHandler(async (req, res) => {
+  try {
+    const recordings = await Recording.find({})
+      .populate("media")
+      .limit(12)
+      .sort({ composer: 1, composition: 1 });
+
+    res.json(recordings);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
+const filterRecordings = asyncHandler(async (req, res) => {
+  try {
+    const { checked, radio } = req.body;
+
+    let args = {};
+    if (checked.length > 0) args.media = checked;
+    if (radio.length) args.category = { $gte: radio[0], $lte: radio[1] };
+
+    const recordings = await Recording.find(args).sort({
+      composer: 1,
+      composition: 1,
+    });
+    res.json(recordings);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
 export {
   createRecording,
   getRecordings,
@@ -145,4 +178,6 @@ export {
   updateRecording,
   deleteRecording,
   getRecordingsSortList,
+  fetchAllRecordings,
+  filterRecordings,
 };

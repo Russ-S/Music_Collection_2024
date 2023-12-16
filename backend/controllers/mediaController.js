@@ -33,9 +33,7 @@ const createMedia = asyncHandler(async (req, res) => {
 // @route   GET /api/media
 // @access  Private/Admin
 const getMedia = asyncHandler(async (req, res) => {
-  const media = await Media.find({}).sort({
-    name: 1,
-  });
+  const media = await Media.find({});
   res.json(media);
 });
 

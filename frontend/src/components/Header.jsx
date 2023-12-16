@@ -27,8 +27,14 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
-        <Container>
+      <Navbar
+        className="px-2"
+        bg="dark"
+        variant="dark"
+        expand="md"
+        collapseOnSelect
+      >
+        <Container fluid>
           <LinkContainer to="/">
             <Navbar.Brand>
               <img src={logo} alt="Classical Music Collection 2024" />
@@ -36,7 +42,7 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
+            <Nav className="ms-auto pe-5">
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                   <LinkContainer to="/profile">
@@ -70,9 +76,9 @@ const Header = () => {
                   <LinkContainer to="/admin/labellist">
                     <NavDropdown.Item>Labels</NavDropdown.Item>
                   </LinkContainer>
-                  {/* <LinkContainer to="/admin/medialist">
+                  <LinkContainer to="/admin/medialist">
                     <NavDropdown.Item>Media Types</NavDropdown.Item>
-                  </LinkContainer> */}
+                  </LinkContainer>
                   <LinkContainer to="/admin/userlist">
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>

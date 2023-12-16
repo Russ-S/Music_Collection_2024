@@ -33,7 +33,7 @@ const createComposer = asyncHandler(async (req, res) => {
 // @route   GET /api/composers
 // @access  Private/Admin
 const getComposers = asyncHandler(async (req, res) => {
-  const pageSize = 8;
+  const pageSize = 10;
   const page = Number(req.query.pageNumber) || 1;
   const count = await Composer.countDocuments();
 

@@ -17,7 +17,6 @@ export const performancesApiSlice = apiSlice.injectEndpoints({
           pageNumber,
         },
       }),
-
       keepUnusedDataFor: 5,
     }),
     getPerformanceDetail: builder.query({
@@ -41,6 +40,16 @@ export const performancesApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    fetchPerformances: builder.query({
+      query: () => `${PERFORMANCES_URL}`,
+    }),
+    getFilteredPerformances: builder.query({
+      query: ({ checked }) => ({
+        url: `${PERFORMANCES_URL}/filtered-performances`,
+        method: "POST",
+        body: { checked },
+      }),
+    }),
   }),
 });
 
@@ -50,4 +59,6 @@ export const {
   useGetPerformanceDetailQuery,
   useUpdatePerformanceMutation,
   useDeletePerformanceMutation,
+  useFetchPerformancesQuery,
+  useGetFilteredPerformancesQuery,
 } = performancesApiSlice;

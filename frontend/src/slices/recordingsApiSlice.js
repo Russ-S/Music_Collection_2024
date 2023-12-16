@@ -19,6 +19,14 @@ export const recordingsApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    // getRecordings: builder.query({
+    //   query: ({ keyword }) => ({
+    //     url: `${RECORDINGS_URL}`,
+    //     params: { keyword },
+    //   }),
+    //   keepUnusedDataFor: 5,
+    //   providesTags: ["Recordings"],
+    // }),
     getRecordingsSortList: builder.query({
       query: () => ({
         url: RECORDINGS_URL,
@@ -52,6 +60,16 @@ export const recordingsApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    allRecordings: builder.query({
+      query: () => `${RECORDINGS_URL}/allRecordings`,
+    }),
+    getFilteredRecordings: builder.query({
+      query: ({ checked, radio }) => ({
+        url: `${RECORDINGS_URL}/filtered-recordings`,
+        method: "POST",
+        body: { checked, radio },
+      }),
+    }),
   }),
 });
 
@@ -63,4 +81,6 @@ export const {
   useUpdateRecordingMutation,
   useDeleteRecordingMutation,
   useUploadCoverImageMutation,
+  useAllRecordingsQuery,
+  useGetFilteredRecordingsQuery,
 } = recordingsApiSlice;

@@ -329,7 +329,7 @@ const AddRecordingScreen = () => {
                   <option value="CD-Recordable">CD-Recordable</option>
                   <option value="Cassette">Cassette</option>
                   <option value="LP Album">LP Album</option>
-                  <option value="Reel-to-Reel">Reel-to-Reel Tape</option>
+                  <option value="Reel to Reel Tape">Reel to Reel Tape</option>
                 </Form.Select>
               </div>
             </Form.Group>

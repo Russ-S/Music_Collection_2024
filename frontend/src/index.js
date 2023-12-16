@@ -16,9 +16,9 @@ import reportWebVitals from "./reportWebVitals";
 import PrivateRoute from "./components/PrivateRoute";
 import AdminRoute from "./components/AdminRoute";
 import HomeScreen from "./screens/HomeScreen";
-import RecordingsScreen from "./screens/RecordingsScreen";
+// import RecordingsScreen from "./screens/RecordingsScreen";
 import RecordingScreen from "./screens/RecordingScreen";
-import PerformancesScreen from "./screens/PerformancesScreen";
+// import PerformancesScreen from "./screens/PerformancesScreen";
 import PerformanceScreen from "./screens/PerformanceScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import LoginScreen from "./screens/LoginScreen";
@@ -43,34 +43,22 @@ import PerformanceEditScreen from "./screens/admin/PerformanceEditScreen";
 import AddPerformanceScreen from "./screens/admin/AddPerformanceScreen";
 import UserListScreen from "./screens/admin/UserListScreen";
 import UserEditScreen from "./screens/admin/UserEditScreen";
-import CDScreen from "./screens/CDScreen";
-import CDRScreen from "./screens/CDRScreen";
-import CassettesScreen from "./screens/CassettesScreen";
-import LPAlbumsScreen from "./screens/LPAlbumsScreen";
-import ReelsScreen from "./screens/ReelsScreen";
+
+import Recordings from "./pages/Recordings/Recordings";
+import Performances from "./pages/Performances/Performances";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
-      <Route path="/recordings" element={<RecordingsScreen />} />
-      <Route
-        path="/recordings/page/:pageNumber"
-        element={<RecordingsScreen />}
-      />
+      {/* <Route path="/allrecordings" element={<RecordingsScreen />} /> */}
+      <Route path="/recordings" element={<Recordings />} />
+      <Route path="/media" element={<MediaListScreen />} />
+      <Route path="/recordings/page/:pageNumber" element={<Recordings />} />
       <Route path="/recording/:id" element={<RecordingScreen />} />
 
-      <Route path="recordings/compactdiscs" element={<CDScreen />} />
-      <Route path="recordings/cd-recordables" element={<CDRScreen />} />
-      <Route path="recordings/cassettes" element={<CassettesScreen />} />
-      <Route path="recordings/lp-albums" element={<LPAlbumsScreen />} />
-      <Route path="recordings/reels" element={<ReelsScreen />} />
-
-      <Route path="/performances" element={<PerformancesScreen />} />
-      <Route
-        path="/performances/page/:pageNumber"
-        element={<PerformancesScreen />}
-      />
+      <Route path="/performances" element={<Performances />} />
+      <Route path="/performances/page/:pageNumber" element={<Performances />} />
       <Route path="/performance/:id" element={<PerformanceScreen />} />
 
       <Route path="/login" element={<LoginScreen />} />

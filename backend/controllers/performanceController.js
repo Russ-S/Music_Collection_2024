@@ -113,10 +113,44 @@ const deletePerformance = asyncHandler(async (req, res) => {
   }
 });
 
+const fetchAllPerformances = asyncHandler(async (req, res) => {
+  try {
+    const performances = await Performance.find({})
+      .populate("workCategory")
+      .limit(12)
+      .sort({ composer: 1, composition: 1 });
+
+    res.json(performances);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
+const filterPerformances = asyncHandler(async (req, res) => {
+  try {
+    const { checked } = req.body;
+
+    let args = {};
+    if (checked.length > 0) args.workCategory = checked;
+
+    const performances = await Performance.find(args).sort({
+      composer: 1,
+      composition: 1,
+    });
+    res.json(performances);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
 export {
   createPerformance,
   getPerformances,
   getPerformanceById,
   updatePeformance,
   deletePerformance,
+  fetchAllPerformances,
+  filterPerformances,
 };

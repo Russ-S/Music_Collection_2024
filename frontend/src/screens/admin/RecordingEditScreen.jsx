@@ -72,8 +72,8 @@ const RecordingEditScreen = () => {
     const updatedRecording = {
       recordingId,
       composer,
-      composition,
       coverImage,
+      composition,
       artists,
       conductor,
       ensemble,

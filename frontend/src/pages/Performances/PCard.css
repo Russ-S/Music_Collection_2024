@@ -1,0 +1,45 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  z-index: -2;
+  background-color: #000;
+}
+
+.card-container a {
+  text-decoration: none;
+}
+
+.card {
+  width: 375px;
+  height: 125px;
+  margin: 10px;
+  border: 2px solid #ededed;
+  cursor: pointer;
+}
+
+.card-composer {
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.card-work {
+  font-size: 15px;
+  font-weight: 650;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 1rem;
+}
+.cardFooter {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

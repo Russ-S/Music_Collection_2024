@@ -33,7 +33,7 @@ const createLabel = asyncHandler(async (req, res) => {
 // @route   GET /api/labels
 // @access  Private/Admin
 const getLabels = asyncHandler(async (req, res) => {
-  const pageSize = 4;
+  const pageSize = 8;
   const page = Number(req.query.pageNumber) || 1;
   const count = await Label.countDocuments();
 

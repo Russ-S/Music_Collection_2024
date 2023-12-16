@@ -7,6 +7,8 @@ import {
   updateRecording,
   deleteRecording,
   getRecordingsSortList,
+  fetchAllRecordings,
+  filterRecordings,
 } from "../controllers/recordingController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
@@ -17,5 +19,8 @@ router
   .get(getRecordingById)
   .put(protect, updateRecording)
   .delete(protect, deleteRecording);
+
+router.route("/allrecordings").get(fetchAllRecordings);
+router.route("/filtered-recordings").post(filterRecordings);
 
 export default router;

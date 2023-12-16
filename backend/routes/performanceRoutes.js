@@ -6,6 +6,8 @@ import {
   createPerformance,
   updatePeformance,
   deletePerformance,
+  fetchAllPerformances,
+  filterPerformances,
 } from "../controllers/performanceController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
@@ -15,5 +17,8 @@ router
   .get(getPerformanceById)
   .put(protect, updatePeformance)
   .delete(protect, deletePerformance);
+
+router.route("/allperformances").get(fetchAllPerformances);
+router.route("/filtered-performances").post(filterPerformances);
 
 export default router;

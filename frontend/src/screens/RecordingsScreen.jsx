@@ -1,16 +1,16 @@
 // import { Row, Col } from "react-bootstrap";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // import Recording from "../components/Recording";
 // import Loader from "../components/Loader";
 // import Message from "../components/Message";
-// import PaginateRecordings from "../components/PaginateRecordings";
-// import { useGetRecordingsQuery } from "../slices/recordingsApiSlice";
+import PaginateRecordings from "../components/PaginateRecordings";
+import { useGetRecordingsQuery } from "../slices/recordingsApiSlice";
 import MultiFilters from "../components/RecordingFilter";
 
 const RecordingsScreen = () => {
-  // const { pageNumber } = useParams();
+  const { pageNumber } = useParams();
 
-  // const { data, isLoading, error } = useGetRecordingsQuery({ pageNumber });
+  const { data, isLoading, error } = useGetRecordingsQuery({ pageNumber });
 
   return (
     <>
@@ -33,7 +33,7 @@ const RecordingsScreen = () => {
                 </Col>
               ))}
               </Row> */}
-        {/* <PaginateRecordings pages={data.pages} page={data.page} /> */}
+        <PaginateRecordings pages={data.pages} page={data.page} />
       </div>
       {/* </> */}
       {/* )} */}

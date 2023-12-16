@@ -9,7 +9,7 @@ import {
 } from "../controllers/mediaController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
-router.route("/").post(protect, createMedia).get(protect, getMedia);
+router.route("/").post(protect, createMedia).get(getMedia);
 router
   .route("/:id")
   .delete(protect, deleteMedia)
