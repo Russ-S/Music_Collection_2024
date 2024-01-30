@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useUploadCoverImageMutation } from "../../slices/recordingsApiSlice";
 
 const AddRecordingScreen = () => {
   // Select fields data
@@ -12,23 +11,25 @@ const AddRecordingScreen = () => {
   const [labels, setLabels] = useState([]);
 
   // Field values
-  const [composer, setComposer] = useState();
-  const [coverImage, setCoverImage] = useState();
-  const [composition, setComposition] = useState();
-  const [artists, setArtists] = useState();
-  const [conductor, setConductor] = useState();
-  const [ensemble, setEnsemble] = useState();
+  const [composer, setComposer] = useState("");
+  const [cover, setCover] = useState("");
+  const [composition, setComposition] = useState("");
+  const [artists, setArtists] = useState("");
+  const [conductor, setConductor] = useState("");
+  const [ensemble, setEnsemble] = useState("");
   const [media, setMedia] = useState();
-  const [workCategory, setWorkCategory] = useState();
-  const [fileCategory, setFileCategory] = useState();
-  const [label, setLabel] = useState();
-  const [catalogNumber, setCatalogNumber] = useState();
-  const [digital, setDigital] = useState();
-  const [source, setSource] = useState();
-  const [tapeNumber, setTapeNumber] = useState();
-  const [purchaseDate, setPurchaseDate] = useState();
-  const [value, setValue] = useState();
-  const [location, setLocation] = useState();
+  // const [media, onChangeText] = useState("");
+
+  const [workCategory, setWorkCategory] = useState("");
+  const [fileCategory, setFileCategory] = useState("");
+  const [label, setLabel] = useState("");
+  const [catalogNumber, setCatalogNumber] = useState("");
+  const [digital, setDigital] = useState("");
+  const [source, setSource] = useState("");
+  const [tapeNumber, setTapeNumber] = useState("");
+  const [purchaseDate, setPurchaseDate] = useState("");
+  const [value, setValue] = useState("");
+  const [location, setLocation] = useState("");
 
   useEffect(() => {
     const fetchComposers = async () => {
@@ -57,11 +58,16 @@ const AddRecordingScreen = () => {
     fetchLabels();
   }, []);
 
-  const [uploadCoverImage, { isLoading: loadingUpload }] =
-    useUploadCoverImageMutation();
-
   const addRecordingHandler = async (e) => {
     e.preventDefault();
+
+    const path = `${cover}`;
+    console.log(cover);
+    const filename = path.replace(/^.*\\/, "");
+    console.log(filename);
+    let coverImage = filename;
+    console.log(coverImage);
+
     const recording = {
       composer,
       coverImage,
@@ -97,7 +103,7 @@ const AddRecordingScreen = () => {
     }
     if (response.ok) {
       setComposer("");
-      setCoverImage("");
+      setCover("");
       setComposition("");
       setArtists("");
       setConductor("");
@@ -117,18 +123,6 @@ const AddRecordingScreen = () => {
     }
   };
 
-  const uploadFileHandler = async (e) => {
-    const formData = new FormData();
-    formData.append("image", e.target.files[0]);
-    try {
-      const res = await uploadCoverImage(formData).unwrap();
-      toast.success(res.message);
-      setCoverImage(res.image);
-    } catch (err) {
-      toast.error(err?.data?.message || err.error);
-    }
-  };
-
   return (
     <div className="propertyList">
       <Link to="/admin/recordinglist" className="btn btn-secondary my-2">
@@ -139,10 +133,10 @@ const AddRecordingScreen = () => {
 
       <Form onSubmit={addRecordingHandler}>
         <Row>
-          <Col md={12}>
+          <Col md={6} sm={12}>
             <Form.Group controlId="composer" className="my-2">
               <div className="formRow">
-                <Form.Label className="labelTop">Composer:</Form.Label>
+                <Form.Label className="labelName">Composer:</Form.Label>
                 <Form.Select
                   type="text"
                   placeholder="Select composer"
@@ -159,7 +153,21 @@ const AddRecordingScreen = () => {
                 </Form.Select>
               </div>
             </Form.Group>
+          </Col>
+          <Col md={6} sm={12}>
+            <Form.Group controlId="coverImage" className="my-2">
+              <div className="formRow">
+                <Form.Label className="labelName">Cover Image:</Form.Label>
+                <Form.Control
+                  type="file"
+                  value={cover}
+                  onChange={(e) => setCover(e.target.value)}
+                ></Form.Control>
+              </div>
+            </Form.Group>
+          </Col>
 
+          <Col md={12}>
             <Form.Group controlId="composition" className="my-2">
               <div className="formRow">
                 <Form.Label className="labelTop">Composition:</Form.Label>
@@ -184,43 +192,11 @@ const AddRecordingScreen = () => {
                 ></Form.Control>
               </div>
             </Form.Group>
-
-            <Form.Group controlId="coverImage" className="my-2">
-              {/* <div className="formRow">
-                <Form.Label className="labelTop">Cover Image:</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Cover image"
-                  value={coverImage}
-                  onChange={(e) => setCoverImage(e.target.value)}
-                ></Form.Control>
-              </div> */}
-              <div className="formRow">
-                <Form.Label className="labelTop">Cover Image:</Form.Label>
-                <div className="imageInputs">
-                  <div className="imageLeft">
-                    <Form.Control
-                      type="text"
-                      placeholder="Cover image url"
-                      value={coverImage}
-                      onChange={(e) => setCoverImage}
-                    ></Form.Control>
-                  </div>
-                  <div className="imageRight">
-                    <Form.Control
-                      type="file"
-                      label="Choose file"
-                      onChange={uploadFileHandler}
-                    ></Form.Control>
-                  </div>
-                </div>
-              </div>
-            </Form.Group>
           </Col>
         </Row>
 
         <Row>
-          <Col md={6} sm={12}>
+          <Col md={6} sm={12} style={{ border: "1px solid red" }}>
             <Form.Group controlId="conductor" className="my-2">
               <div className="formRow">
                 <Form.Label className="labelName">Conductor:</Form.Label>
@@ -393,6 +369,7 @@ const AddRecordingScreen = () => {
                   placeholder="Select source"
                   required
                   value={source}
+                  disabled={media === "Compact Disc" || media === "LP Album"}
                   onChange={(e) => setSource(e.target.value)}
                 >
                   <option>Select Source</option>
@@ -409,10 +386,12 @@ const AddRecordingScreen = () => {
             <Form.Group controlId="tapeNumber" className="my-2">
               <div className="formRow">
                 <Form.Label className="labelName">Tape Number:</Form.Label>
+
                 <Form.Control
                   type="text"
                   placeholder="Enter CD-R/Tape number"
                   value={tapeNumber}
+                  disabled={media === "Compact Disc" || media === "LP Album"}
                   onChange={(e) => setTapeNumber(e.target.value)}
                 ></Form.Control>
               </div>

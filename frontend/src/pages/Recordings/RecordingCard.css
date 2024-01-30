@@ -16,16 +16,8 @@
   border: 2px solid #ededed;
   cursor: pointer;
 }
-
-.card-composer {
-  font-size: 18px;
-  font-weight: 600;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
 .card-work {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 650;
   margin-left: 5px;
   margin-right: 5px;

@@ -14,7 +14,7 @@ import labelRoutes from "./routes/labelRoutes.js";
 import mediaRoutes from "./routes/mediaRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 connectDB(); // connect to MongoDB
 

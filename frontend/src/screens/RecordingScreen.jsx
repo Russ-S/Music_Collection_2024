@@ -31,7 +31,7 @@ const RecordingScreen = () => {
           <Row>
             <Col lg={3} md={12} className="text-center">
               <Image
-                src={`/${recording.coverImage}`}
+                src={`/covers/${recording.coverImage}`}
                 alt={recording.composition}
                 fluid
                 style={{

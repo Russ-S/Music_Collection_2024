@@ -13,20 +13,6 @@ const Recording = ({ recording }) => {
       >
         <div>
           <Row>
-            {/* <Col sm={4}>
-              <Link to={`/recording/${recording._id}`}>
-                <Card.Img
-                  src={recording.coverImage}
-                  variant="top"
-                  style={{
-                    height: "75px",
-                    width: "75px",
-                    border: "1px solid #000",
-                  }}
-                />
-              </Link>
-            </Col> */}
-
             <Col sm={12}>
               <Link to={`/recording/${recording._id}`}>
                 <Card.Text as="div" style={{ fontSize: "14px" }}>

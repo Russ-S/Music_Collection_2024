@@ -35,7 +35,7 @@ const Recordings = () => {
   useEffect(() => {
     if (!checked.length || !radio.length) {
       if (!filteredRecordingsQuery.isLoading) {
-        // Filter recordsings based on checked media
+        // Filter recordings based on checked media
         const filteredMedia = filteredRecordingsQuery.data.filter(
           (recording) => {
             return recording.media;
