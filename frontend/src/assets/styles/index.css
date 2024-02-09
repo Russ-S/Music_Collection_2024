@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+  color: #000;
+}
 main {
   min-height: 83vh;
 }
@@ -13,6 +17,30 @@ main {
   background-size: cover;
   position: relative;
   margin: 0 auto;
+}
+.searchForm {
+  position: relative;
+  width: auto;
+  text-align: center;
+  right: 35px;
+}
+.searchForm input {
+  width: 100%;
+  padding: 5px;
+  border-radius: 12px;
+  outline: none;
+}
+.searchForm button {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  background: transparent;
+  border: none;
+}
+@media (max-width: 991px) {
+  .searchForm {
+    right: 0;
+  }
 }
 
 .dropdown-item.active {
@@ -221,18 +249,117 @@ table th {
   padding: 1rem;
   border-radius: 10px;
 }
+.searchParams {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  height: 100vh;
+  background: #000;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.searchParams input[type="text"] {
+  width: 100%;
+  height: 5px;
+  border-radius: 10px;
+  outline: none;
+}
+.searchParams input[type="radio"] {
+  transform: scale(1.25);
+}
+.searchBox {
+  border-radius: 10px;
+  outline: none;
+  margin-right: 20px;
+  width: 80%;
+}
+
+.checkboxLabel {
+  font-size: 18px;
+}
+.searchParams button {
+  width: 100%;
+  text-transform: uppercase;
+  font-weight: 600;
+}
 .recordingList,
 .performanceList {
   flex: 1;
   margin-left: 30px;
   height: 100%;
-  background: #fff;
+  /* background: #fff; */
+  background-color: rgb(233, 238, 233);
   color: #000;
   padding: 1rem;
   border-radius: 10px;
   align-items: center;
 }
 
+.searchResults {
+  flex: 1;
+  height: 100%;
+  background-color: rgb(233, 238, 233);
+  color: #000;
+  padding: 1rem;
+  border-radius: 10px;
+  align-items: center;
+}
+.searchResultCard {
+  position: relative;
+  width: 325px;
+  height: 270px;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+.searchPerfCard {
+  position: relative;
+  width: 325px;
+  height: 170px;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+.composer {
+  font-weight: 700;
+  font-size: 16px;
+  color: #232323;
+}
+.composition {
+  font-weight: 600;
+  font-size: 14px;
+  color: rgb(83, 82, 82);
+}
+.artists {
+  position: absolute;
+  top: 190px;
+  font-weight: 600;
+  font-size: 13px;
+  color: rgb(189, 30, 117);
+}
+.media {
+  position: absolute;
+  bottom: 0;
+  left: 5px;
+  color: rgb(126, 3, 70);
+  font-weight: 700;
+}
+.category {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+  color: rgb(126, 3, 70);
+  font-weight: 700;
+}
+.perf-artists {
+  position: absolute;
+  top: 80px;
+  font-weight: 600;
+  font-size: 13px;
+  color: rgb(189, 30, 117);
+}
 .borderWhite {
   border: 1px solid #fff;
 }

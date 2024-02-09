@@ -8,10 +8,12 @@ import {
   deletePerformance,
   fetchAllPerformances,
   filterPerformances,
+  fetchPerformances,
 } from "../controllers/performanceController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 router.route("/").post(protect, createPerformance).get(getPerformances);
+router.route("/result").get(fetchPerformances);
 router
   .route("/:id")
   .get(getPerformanceById)

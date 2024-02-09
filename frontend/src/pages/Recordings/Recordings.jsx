@@ -11,9 +11,11 @@ import {
 } from "../../redux/recordings/recordingSlice";
 
 import RecordingCard from "./RecordingCard";
+import RecordingSearchForm from "../../components/RecordingSearchForm";
 
 const Recordings = () => {
   const dispatch = useDispatch();
+
   const { media, recordings, checked, radio } = useSelector(
     (state) => state.recordings
   );
@@ -116,10 +118,11 @@ const Recordings = () => {
           <h6 className="fw-semibold">Filter By Category</h6>
 
           <div className="ml-5 mb-4">
-            {uniqueCategories?.map((workCategory) => (
+            {uniqueCategories?.map((workCategory, index) => (
               <>
                 <div className="flex items-center ms-3 mb-1">
                   <input
+                    key={index}
                     type="radio"
                     id={workCategory}
                     name="brand"
@@ -144,7 +147,14 @@ const Recordings = () => {
         </div>
 
         <div className="recordingList">
-          <h4>{recordings?.length} Recordings</h4>
+          <div className="row d-flex pb-3">
+            <div className="col-lg-6 col-md-12">
+              <h4>{recordings?.length} Recordings</h4>
+            </div>
+            <div className="col-lg-6 col-md-12">
+              <RecordingSearchForm />
+            </div>
+          </div>
 
           <div className="card-container">
             {recordings.length === 0 ? (

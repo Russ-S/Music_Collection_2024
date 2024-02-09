@@ -35,11 +35,14 @@ const Header = () => {
         collapseOnSelect
       >
         <Container fluid>
-          <LinkContainer to="/">
-            <Navbar.Brand>
-              <img src={logo} alt="Classical Music Collection 2024" />
-            </Navbar.Brand>
-          </LinkContainer>
+          <div className="me-auto">
+            <LinkContainer to="/">
+              <Navbar.Brand>
+                <img src={logo} alt="Classical Music Collection 2024" />
+              </Navbar.Brand>
+            </LinkContainer>
+          </div>
+
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto pe-5">

@@ -9,11 +9,13 @@ import {
   getRecordingsSortList,
   fetchAllRecordings,
   filterRecordings,
+  fetchRecordings,
 } from "../controllers/recordingController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 router.route("/").post(protect, createRecording).get(getRecordings);
 router.route("/sortlist").get(getRecordingsSortList);
+router.route("/result").get(fetchRecordings);
 router
   .route("/:id")
   .get(getRecordingById)

@@ -145,6 +145,36 @@ const filterPerformances = asyncHandler(async (req, res) => {
   }
 });
 
+const fetchPerformances = asyncHandler(async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit) || 15;
+    const startIndex = parseInt(req.query.startIndex) || 0;
+
+    const searchTerm = req.query.searchTerm || "";
+
+    const performances = await Performance.find({
+      $or: [
+        { composer: { $regex: searchTerm, $options: "i" } },
+        { composition: { $regex: searchTerm, $options: "i" } },
+        { artists: { $regex: searchTerm, $options: "i" } },
+        { conductor: { $regex: searchTerm, $options: "i" } },
+        { ensemble: { $regex: searchTerm, $options: "i" } },
+        { concertHall: { $regex: searchTerm, $options: "i" } },
+      ],
+    })
+      .sort({
+        composer: 1,
+        composition: 1,
+      })
+      .limit(limit)
+      .skip(startIndex);
+
+    return res.status(200).json(performances);
+  } catch (error) {
+    next(error);
+  }
+});
+
 export {
   createPerformance,
   getPerformances,
@@ -153,4 +183,5 @@ export {
   deletePerformance,
   fetchAllPerformances,
   filterPerformances,
+  fetchPerformances,
 };

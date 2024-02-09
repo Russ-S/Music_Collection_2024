@@ -2,7 +2,6 @@
   display: flex;
   flex-wrap: wrap;
   z-index: -2;
-  background-color: #000;
 }
 
 .card-container a {
@@ -10,26 +9,40 @@
 }
 
 .card {
-  width: 375px;
-  height: 125px;
+  position: relative;
+  width: 290px;
+  height: 140px;
   margin: 10px;
-  border: 2px solid #ededed;
+  border: 1px solid #000;
+  border-radius: 10px;
   cursor: pointer;
 }
 
 .card-composer {
-  font-size: 18px;
+  font-size: 17px;
+  color: #232323;
   font-weight: 600;
   margin-left: 5px;
   margin-right: 5px;
 }
 
 .card-work {
+  font-weight: 600;
   font-size: 15px;
-  font-weight: 650;
+  color: rgb(83, 82, 82);
   margin-left: 5px;
   margin-right: 5px;
   margin-bottom: 1rem;
+  -webkit-line-clamp: 3;
+}
+.card-artists {
+  font-weight: 600;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 13px;
+  color: rgb(189, 30, 117);
+  position: absolute;
+  top: 70px;
 }
 .cardFooter {
   position: absolute;

@@ -6,6 +6,7 @@ import { setPerformances } from "../../redux/performances/performanceSlice";
 import Concert from "./Concert";
 import Card from "./PCard";
 import ReactPaginate from "react-paginate";
+import PerformanceSearchForm from "../../components/PerformanceSearchForm";
 // import PerformanceCard from "./PerformanceCard";
 
 const Performances = () => {
@@ -54,21 +55,30 @@ const Performances = () => {
     // Applying selected filter
     if (selected) {
       filteredPerformances = filteredPerformances.filter(
-        ({ composer, composition, workCategory, performanceDate }) =>
+        ({ composer, composition, artists, workCategory, performanceDate }) =>
           composer === selected ||
           composition === selected ||
+          artists === selected ||
           workCategory === selected ||
           performanceDate === selected
       );
     }
 
     return filteredPerformances.map(
-      ({ _id, composer, composition, performanceDate, workCategory }) => (
+      ({
+        _id,
+        composer,
+        composition,
+        artists,
+        performanceDate,
+        workCategory,
+      }) => (
         <Card
           key={Math.random()}
           id={_id}
           composer={composer}
           composition={composition}
+          artists={artists}
           performanceDate={performanceDate}
           workCategory={workCategory}
         />
@@ -93,7 +103,7 @@ const Performances = () => {
 
   // for pagination
   const [pageNumber, setPageNumber] = useState(0);
-  const performancesPerPage = 16;
+  const performancesPerPage = 20;
   const pagesVisited = pageNumber * performancesPerPage;
 
   const pageCount = Math.ceil(result.length / performancesPerPage);
@@ -158,12 +168,19 @@ const Performances = () => {
           </div>
         </div>
         <div className="performanceList">
-          <h4>{result.length} Performances</h4>
+          <div className="row d-flex pb-3">
+            <div className="col-lg-6 col-md-12">
+              <h4>{result.length} Performances</h4>
+            </div>
+            <div className="col-lg-6 col-md-12">
+              <PerformanceSearchForm />
+            </div>
+          </div>
+
           <div className="card-container">
             {result.length === 0 ? (
               <h3>No performances found</h3>
             ) : (
-              // <Concert result={result} />
               result
                 ?.map((result) => (
                   <div key={remountComponent}>

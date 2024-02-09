@@ -31,6 +31,7 @@ const recordingSchema = new mongoose.Schema(
     },
     digital: {
       type: String,
+      default: "None",
     },
     workCategory: {
       type: String,

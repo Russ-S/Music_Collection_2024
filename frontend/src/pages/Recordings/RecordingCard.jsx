@@ -4,10 +4,16 @@ import "./RecordingCard.css";
 const RecordingCard = ({ r }) => {
   return (
     <Link to={`/recording/${r._id}`}>
-      <section className="card">
+      <section className="recordingCard shadow-lg">
         <div className="card-details">
-          <section className="card-composer">{r.composer}</section>
-          <section className="card-work">{r.composition}</section>
+          <section className="card-image text-center">
+            <img src={`/covers/${r.coverImage}`} alt="album cover" />
+          </section>
+          <section className="cardComposer">{r.composer}</section>
+          <section className="cardWork">{r.composition}</section>
+          <div className="cardArtists">
+            <p>{r.artists}</p>
+          </div>
           <div className="cardFooter">
             <div className="bg-warning d-flex justify-content-between px-2">
               <span className="pull-left">

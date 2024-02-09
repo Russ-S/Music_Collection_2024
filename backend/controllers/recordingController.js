@@ -138,6 +138,35 @@ const deleteRecording = asyncHandler(async (req, res) => {
   }
 });
 
+const fetchRecordings = async (req, res, next) => {
+  try {
+    const limit = parseInt(req.query.limit) || 10;
+    const startIndex = parseInt(req.query.startIndex) || 0;
+
+    const searchTerm = req.query.searchTerm || "";
+
+    const recordings = await Recording.find({
+      $or: [
+        { composer: { $regex: searchTerm, $options: "i" } },
+        { composition: { $regex: searchTerm, $options: "i" } },
+        { artists: { $regex: searchTerm, $options: "i" } },
+        { conductor: { $regex: searchTerm, $options: "i" } },
+        { ensemble: { $regex: searchTerm, $options: "i" } },
+      ],
+    })
+      .sort({
+        composer: 1,
+        composition: 1,
+      })
+      .limit(limit)
+      .skip(startIndex);
+
+    return res.status(200).json(recordings);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const fetchAllRecordings = asyncHandler(async (req, res) => {
   try {
     const recordings = await Recording.find({})
@@ -178,6 +207,7 @@ export {
   updateRecording,
   deleteRecording,
   getRecordingsSortList,
+  fetchRecordings,
   fetchAllRecordings,
   filterRecordings,
 };

@@ -65,7 +65,7 @@ const AddRecordingScreen = () => {
     console.log(cover);
     const filename = path.replace(/^.*\\/, "");
     console.log(filename);
-    let coverImage = filename;
+    let coverImage = filename || "no-image.jpg";
     console.log(coverImage);
 
     const recording = {
@@ -196,7 +196,7 @@ const AddRecordingScreen = () => {
         </Row>
 
         <Row>
-          <Col md={6} sm={12} style={{ border: "1px solid red" }}>
+          <Col md={6} sm={12}>
             <Form.Group controlId="conductor" className="my-2">
               <div className="formRow">
                 <Form.Label className="labelName">Conductor:</Form.Label>
@@ -349,6 +349,7 @@ const AddRecordingScreen = () => {
                   type="text"
                   placeholder="Select digital"
                   required
+                  disabled={media === "LP Album"}
                   value={digital}
                   onChange={(e) => setDigital(e.target.value)}
                 >

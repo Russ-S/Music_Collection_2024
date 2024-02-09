@@ -46,6 +46,8 @@ import UserEditScreen from "./screens/admin/UserEditScreen";
 
 import Recordings from "./pages/Recordings/Recordings";
 import Performances from "./pages/Performances/Performances";
+import SearchRecordings from "./pages/SearchRecordings";
+import SearchPerformances from "./pages/SearchPerformances";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -60,6 +62,9 @@ const router = createBrowserRouter(
       <Route path="/performances" element={<Performances />} />
       <Route path="/performances/page/:pageNumber" element={<Performances />} />
       <Route path="/performance/:id" element={<PerformanceScreen />} />
+
+      <Route path="/search-recordings" element={<SearchRecordings />} />
+      <Route path="/search-performances" element={<SearchPerformances />} />
 
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />

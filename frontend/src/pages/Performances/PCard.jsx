@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
 import "./PCard.css";
 
-const Card = ({ id, composer, composition, performanceDate, workCategory }) => {
+const Card = ({
+  id,
+  composer,
+  composition,
+  artists,
+  performanceDate,
+  workCategory,
+}) => {
   return (
     <>
       <Link to={`/performance/${id}`}>
@@ -9,6 +16,7 @@ const Card = ({ id, composer, composition, performanceDate, workCategory }) => {
           <div className="card-details">
             <section className="card-composer">{composer}</section>
             <section className="card-work">{composition}</section>
+            <section className="card-artists">{artists}</section>
             <div className="cardFooter">
               <div className="bg-warning d-flex justify-content-between px-2">
                 <span className="pull-left">
