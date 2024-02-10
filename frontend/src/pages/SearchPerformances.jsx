@@ -9,6 +9,7 @@ const SearchPerformances = () => {
     searchTerm: "",
   });
   const [performances, setPerformances] = useState([]);
+  const [showMore, setShowMore] = useState(false);
   console.log(performances);
 
   const navigate = useNavigate();
@@ -23,15 +24,15 @@ const SearchPerformances = () => {
     }
     const fetchPerformances = async () => {
       setLoading(true);
-      // setShowMore(false);
+      setShowMore(false);
       const searchQuery = urlParams.toString();
       const res = await fetch(`/api/performances/result?${searchQuery}`);
       const data = await res.json();
-      // if (data.length > 8) {
-      //   setShowMore(true);
-      // } else {
-      //   setShowMore(false);
-      // }
+      if (data.length > 9) {
+        setShowMore(true);
+      } else {
+        setShowMore(false);
+      }
       setPerformances(data);
       setLoading(false);
     };
@@ -51,6 +52,20 @@ const SearchPerformances = () => {
     urlParams.set("searchTerm", sidebardata.searchTerm);
     const searchQuery = urlParams.toString();
     navigate(`/search-performances?${searchQuery}`);
+  };
+
+  const onShowMoreClick = async () => {
+    const numberOfPerformances = performances.length;
+    const startIndex = numberOfPerformances;
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("startIndex", startIndex);
+    const searchQuery = urlParams.toString();
+    const res = await fetch(`/api/performances/result?${searchQuery}`);
+    const data = await res.json();
+    if (data.length < 14) {
+      setShowMore(false);
+    }
+    setPerformances([...performances, ...data]);
   };
 
   return (
@@ -82,6 +97,11 @@ const SearchPerformances = () => {
           performances.map((performance) => (
             <PerformanceItem key={performance._id} performance={performance} />
           ))}
+        {showMore && (
+          <button onClick={onShowMoreClick} className="btn showMore">
+            Show more
+          </button>
+        )}
       </div>
     </div>
   );

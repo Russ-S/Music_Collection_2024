@@ -360,6 +360,14 @@ table th {
   font-size: 13px;
   color: rgb(189, 30, 117);
 }
+.showMore {
+  font-size: 18px;
+  color: rgb(21, 128, 61);
+}
+.showMore:hover {
+  color: rgb(21, 128, 61);
+  text-decoration: underline;
+}
 .borderWhite {
   border: 1px solid #fff;
 }

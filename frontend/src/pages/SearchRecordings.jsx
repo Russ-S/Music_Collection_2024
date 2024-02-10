@@ -9,7 +9,7 @@ const SearchRecordings = () => {
     searchTerm: "",
   });
   const [recordings, setRecordings] = useState([]);
-  console.log(recordings);
+  const [showMore, setShowMore] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,15 +23,15 @@ const SearchRecordings = () => {
     }
     const fetchRecordings = async () => {
       setLoading(true);
-      // setShowMore(false);
+      setShowMore(false);
       const searchQuery = urlParams.toString();
       const res = await fetch(`/api/recordings/result?${searchQuery}`);
       const data = await res.json();
-      // if (data.length > 8) {
-      //   setShowMore(true);
-      // } else {
-      //   setShowMore(false);
-      // }
+      if (data.length > 9) {
+        setShowMore(true);
+      } else {
+        setShowMore(false);
+      }
       setRecordings(data);
       setLoading(false);
     };
@@ -51,6 +51,20 @@ const SearchRecordings = () => {
     urlParams.set("searchTerm", sidebardata.searchTerm);
     const searchQuery = urlParams.toString();
     navigate(`/search-recordings?${searchQuery}`);
+  };
+
+  const onShowMoreClick = async () => {
+    const numberOfRecordings = recordings.length;
+    const startIndex = numberOfRecordings;
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("startIndex", startIndex);
+    const searchQuery = urlParams.toString();
+    const res = await fetch(`/api/recordings/result?${searchQuery}`);
+    const data = await res.json();
+    if (data.length < 9) {
+      setShowMore(false);
+    }
+    setRecordings([...recordings, ...data]);
   };
 
   return (
@@ -82,6 +96,12 @@ const SearchRecordings = () => {
           recordings.map((recording) => (
             <RecordingItem key={recording._id} recording={recording} />
           ))}
+
+        {showMore && (
+          <button onClick={onShowMoreClick} className="btn showMore">
+            Show more
+          </button>
+        )}
       </div>
     </div>
   );
