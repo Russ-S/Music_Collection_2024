@@ -152,6 +152,7 @@ const fetchRecordings = async (req, res, next) => {
         { artists: { $regex: searchTerm, $options: "i" } },
         { conductor: { $regex: searchTerm, $options: "i" } },
         { ensemble: { $regex: searchTerm, $options: "i" } },
+        { location: { $regex: searchTerm, $options: "i" } },
       ],
     })
       .sort({

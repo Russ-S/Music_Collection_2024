@@ -13,7 +13,7 @@ const PerformanceItem = ({ performance }) => {
             <span className="perf-artists">{performance.artists}</span>
           </p>
         </div>
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between px-2">
           <p className="media">
             {performance.performanceDate.substring(0, 10)}
           </p>

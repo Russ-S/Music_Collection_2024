@@ -7,8 +7,8 @@ const Search = () => {
   const [sidebardata, setSidebardata] = useState({
     searchTerm: "",
   });
-  const [recordings, setRecordings] = useState([]);
-  console.log(recordings);
+  const [movies, setMovies] = useState([]);
+  console.log(movies);
 
   const navigate = useNavigate();
 
@@ -20,22 +20,22 @@ const Search = () => {
         searchTerm: searchTermFromUrl || "",
       });
     }
-    const fetchRecordings = async () => {
+    const fetchMovies = async () => {
       setLoading(true);
       // setShowMore(false);
       const searchQuery = urlParams.toString();
-      const res = await fetch(`/api/recordings/result?${searchQuery}`);
+      const res = await fetch(`/api/movies/result?${searchQuery}`);
       const data = await res.json();
       // if (data.length > 8) {
       //   setShowMore(true);
       // } else {
       //   setShowMore(false);
       // }
-      setRecordings(data);
+      setMovies(data);
       setLoading(false);
     };
 
-    fetchRecordings();
+    fetchMovies();
   }, [location.search]);
 
   const handleChange = (e) => {
@@ -60,7 +60,7 @@ const Search = () => {
           <input
             type="text"
             id="searchTerm"
-            placeholder="Search recordings..."
+            placeholder="Search movies..."
             className="searchBox p-1"
             value={sidebardata.searchTerm}
             onChange={handleChange}

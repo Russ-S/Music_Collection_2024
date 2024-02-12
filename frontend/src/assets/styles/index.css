@@ -33,7 +33,7 @@ main {
 .searchForm button {
   position: absolute;
   top: 5px;
-  right: 15px;
+  right: 20px;
   background: transparent;
   border: none;
 }
