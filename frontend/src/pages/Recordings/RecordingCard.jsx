@@ -7,7 +7,7 @@ const RecordingCard = ({ r }) => {
       <section className="recordingCard shadow-lg">
         <div className="card-details">
           <section className="card-image text-center">
-            <img src={`/covers/${r.coverImage}`} alt="album cover" />
+            <img src={`${r.coverImage}`} alt="album cover" />
           </section>
           <section className="cardComposer">{r.composer}</section>
           <section className="cardWork">{r.composition}</section>
@@ -15,11 +15,11 @@ const RecordingCard = ({ r }) => {
             <p>{r.artists}</p>
           </div>
           <div className="cardFooter">
-            <div className="bg-warning d-flex justify-content-between px-2">
-              <span className="pull-left">
+            <div className="cardBottom bg-warning d-flex justify-content-between px-2">
+              <span>
                 <strong>{r.media}</strong>
               </span>
-              <span className="pull-right">
+              <span>
                 <strong>{r.workCategory}</strong>
               </span>
             </div>

@@ -11,16 +11,17 @@
 .recordingCard {
   position: relative;
   width: 290px;
-  height: 265px;
+  height: 235px;
   margin: 10px;
   padding: 10px 5px;
+  background-color: #fff;
   border: 1px solid #000;
-  border-radius: 10px;
+  border-radius: 7px;
   cursor: pointer;
 }
 .card-image img {
-  width: 100px;
-  height: 100px;
+  width: 75px;
+  height: 75px;
   margin: 0 auto;
   border: 1px solid #000;
 }
@@ -47,7 +48,7 @@
   font-size: 13px;
   color: rgb(189, 30, 117);
   position: absolute;
-  top: 175px;
+  top: 150px;
 }
 .cardFooter {
   position: absolute;

@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const HomeScreen = () => {
   return (
     <div className="homePage">
-      <div className="links">
+      {/* <div className="links">
         <Link className="btn btn-link my-3 me-5" to="/recordings">
           Recordings
         </Link>
@@ -11,7 +11,7 @@ const HomeScreen = () => {
         <Link className="btn btn-link my-3 me-5" to="/performances">
           Performances
         </Link>
-      </div>
+      </div> */}
       <div className="homePageTitle">
         <h3 className="mainTitle text-center">
           Classical Music Collection & Performance Catalog 2024

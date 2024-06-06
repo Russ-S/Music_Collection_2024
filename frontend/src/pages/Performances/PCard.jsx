@@ -18,11 +18,11 @@ const Card = ({
             <section className="card-work">{composition}</section>
             <section className="card-artists">{artists}</section>
             <div className="cardFooter">
-              <div className="bg-warning d-flex justify-content-between px-2">
-                <span className="pull-left">
+              <div className="cardBottom bg-warning d-flex justify-content-between px-2">
+                <span>
                   <strong>{performanceDate.substring(0, 10)}</strong>
                 </span>
-                <span className="pull-right">
+                <span>
                   <strong>{workCategory}</strong>
                 </span>
               </div>

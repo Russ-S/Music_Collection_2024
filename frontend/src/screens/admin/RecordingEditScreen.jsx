@@ -97,9 +97,9 @@ const RecordingEditScreen = () => {
 
   return (
     <div className="propertyList">
-      <Link to="/admin/recordinglist" className="btn btn-secondary my-2">
+      {/* <Link to="/admin/recordinglist" className="btn btn-secondary my-2">
         Go Back
-      </Link>
+      </Link> */}
 
       <h4>Edit Recording</h4>
       {loadingUpdate && <Loader />}
@@ -333,9 +333,18 @@ const RecordingEditScreen = () => {
             </Col>
           </Row>
 
-          <Button type="submit" variant="dark" className="my-2">
-            Update
-          </Button>
+          <div className="d-flex justify-content-center gap-5">
+            <Button type="submit" variant="success" className="my-2">
+              Update
+            </Button>
+            <Link to="/admin/recordinglist" className="btn btn-danger my-2">
+              Cancel
+            </Link>
+          </div>
+
+          {/* <Button variant="danger" className="my-2">
+            Cancel
+          </Button> */}
         </Form>
       )}
     </div>

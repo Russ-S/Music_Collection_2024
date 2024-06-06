@@ -162,9 +162,9 @@ const Recordings = () => {
             ) : (
               recordings
                 ?.slice(pagesVisited, pagesVisited + recordingsPerPage)
-                .map((r) => (
-                  <div key={r._id}>
-                    <RecordingCard r={r} />
+                .map((r, index) => (
+                  <div>
+                    <RecordingCard r={r} key={index} />
                   </div>
                 ))
             )}

@@ -6,11 +6,11 @@ const RecordingItem = ({ recording }) => {
       <Link to={`/recording/${recording._id}`}>
         <div className="text-center">
           <img
-            src={`/covers/${recording.coverImage}` || "/covers/no-image.jpg"}
+            src={`${recording.coverImage}` || "/covers/no-image.jpg"}
             alt="album cover"
             style={{
-              width: "100px",
-              height: "100px",
+              width: "75px",
+              height: "75px",
               border: "1px solid #000",
             }}
           />

@@ -54,14 +54,22 @@ const PerformanceListScreen = () => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <Table striped hover responsive className="table=sm">
+          <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>COMPOSER</th>
-                <th>COMPOSITION</th>
-                <th>CATEGORY</th>
-                <th>DATE</th>
-                <th></th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>
+                  COMPOSER
+                </th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>
+                  COMPOSITION
+                </th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>
+                  CATEGORY
+                </th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>DATE</th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>
+                  ACTIONS
+                </th>
               </tr>
             </thead>
             <tbody>

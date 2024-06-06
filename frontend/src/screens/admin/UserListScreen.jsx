@@ -39,11 +39,13 @@ const UserListScreen = () => {
         <Table striped bordered hover responsive className="table-sm">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>NAME</th>
-              <th>EMAIL</th>
-              <th>ADMIN</th>
-              <th></th>
+              <th style={{ backgroundColor: "#000", color: "#fff" }}>ID</th>
+              <th style={{ backgroundColor: "#000", color: "#fff" }}>NAME</th>
+              <th style={{ backgroundColor: "#000", color: "#fff" }}>EMAIL</th>
+              <th style={{ backgroundColor: "#000", color: "#fff" }}>ADMIN</th>
+              <th style={{ backgroundColor: "#000", color: "#fff" }}>
+                EDIT/DELETE
+              </th>
             </tr>
           </thead>
           <tbody>

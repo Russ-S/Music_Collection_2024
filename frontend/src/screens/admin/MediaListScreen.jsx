@@ -62,12 +62,14 @@ const MediaListScreen = () => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <Table striped hover responsive className="table=sm">
+          <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th></th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>ID</th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>NAME</th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>
+                  EDIT/DELETE
+                </th>
               </tr>
             </thead>
             <tbody>

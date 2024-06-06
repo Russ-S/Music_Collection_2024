@@ -54,15 +54,27 @@ const RecordingListScreen = () => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <Table striped hover responsive className="table=sm">
+          <Table striped bordered hover responsive className="table-sm">
             <thead>
               <tr>
-                <th>COMPOSER</th>
-                <th>COMPOSITION</th>
-                <th>CATEGORY</th>
-                <th>MEDIA</th>
-                <th>LOCATION</th>
-                <th></th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>
+                  COMPOSER
+                </th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>
+                  COMPOSITION
+                </th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>
+                  CATEGORY
+                </th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>
+                  MEDIA
+                </th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>
+                  LOCATION
+                </th>
+                <th style={{ backgroundColor: "#000", color: "#fff" }}>
+                  EDIT/DELETE
+                </th>
               </tr>
             </thead>
             <tbody>

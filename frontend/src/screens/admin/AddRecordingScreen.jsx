@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
 import axios from "axios";
 
 const AddRecordingScreen = () => {
+  const navigate = useNavigate();
   // Select fields data
   const [composers, setComposers] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -63,9 +64,9 @@ const AddRecordingScreen = () => {
 
     const path = `${cover}`;
     console.log(cover);
-    const filename = path.replace(/^.*\\/, "");
+    const filename = path.replace(/^.*\\/, "/covers/");
     console.log(filename);
-    let coverImage = filename || "no-image.jpg";
+    let coverImage = filename || "/covers/no-image.jpg";
     console.log(coverImage);
 
     const recording = {
@@ -121,14 +122,11 @@ const AddRecordingScreen = () => {
       setLocation("");
       toast.success("Recording successfully added");
     }
+    navigate("/admin/recordinglist");
   };
 
   return (
-    <div className="propertyList">
-      <Link to="/admin/recordinglist" className="btn btn-secondary my-2">
-        Go Back
-      </Link>
-
+    <div className="propertyList mt-3">
       <h4>Add New Recording</h4>
 
       <Form onSubmit={addRecordingHandler}>
@@ -421,9 +419,14 @@ const AddRecordingScreen = () => {
           </Col>
         </Row>
 
-        <Button type="submit" variant="dark" className="my-2">
-          Add New Recording
-        </Button>
+        <div className="d-flex justify-content-center gap-5">
+          <Button type="submit" variant="success" className="my-2">
+            Add New Recording
+          </Button>
+          <Link to="/admin/recordinglist" className="btn btn-warning my-2">
+            Cancel
+          </Link>
+        </div>
       </Form>
     </div>
   );

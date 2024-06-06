@@ -69,6 +69,9 @@ main {
   align-items: center;
   justify-content: space-evenly;
 }
+.btn {
+  font-weight: bold;
+}
 .btn-link {
   border: 1px solid white;
   background: #000;
@@ -306,8 +309,8 @@ table th {
 }
 .searchResultCard {
   position: relative;
-  width: 325px;
-  height: 270px;
+  width: 290px;
+  height: 235px;
   background-color: #fff;
   padding: 10px;
   border: 1px solid #000;

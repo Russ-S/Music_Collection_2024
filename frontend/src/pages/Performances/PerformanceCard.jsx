@@ -28,13 +28,12 @@ const PerformanceCard = ({ r }) => {
           </div>
 
           <div className="bg-warning d-flex justify-content-between rounded px-2">
-            <span className="pull-left">
-              {/* <strong>{r.performanceDate.substring(0, 10)}</strong> */}
-              {r.workCategory}
-            </span>
-            <span className="pull-right">
-              <strong>{r.workCategory}</strong>
-            </span>
+            <div className="cardBottom bg-warning d-flex justify-content-between px-2">
+              <span>{r.workCategory}</span>
+              <span>
+                <strong>{r.workCategory}</strong>
+              </span>
+            </div>
           </div>
         </Card.Body>
       </Card>

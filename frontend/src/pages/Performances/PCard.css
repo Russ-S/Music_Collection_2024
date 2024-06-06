@@ -14,7 +14,6 @@
   height: 140px;
   margin: 10px;
   border: 1px solid #000;
-  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -49,6 +48,10 @@
   bottom: 0;
   left: 0;
   width: 100%;
+}
+.cardBottom {
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
 }
 
 .card-info {
